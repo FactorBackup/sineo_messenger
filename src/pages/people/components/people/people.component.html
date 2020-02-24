@@ -48,6 +48,27 @@
             <a hidden #callNumber href="tel:+{{ contact.mobile || contact.phone }}"></a>
           </div>
         </div>
+
+				<div
+					class="group"
+					*ngFor="let item of contactlist; let i = index"
+				>
+					<div class="contact">
+						<div class="contactimage" [routerLink]="['#']">
+							<img src="/assets/imgs/nonuser.png" />
+						</div>
+						<div class="detail">
+							<div class="name">{{ item.displayName }}</div>
+							<div
+								class="nativecontactphonenumber"
+								*ngIf="item.phoneNumbers"
+							>
+								{{ item.phoneNumbers }}
+							</div>
+						</div>
+					</div>
+				</div>
+        
       </div>
 
       <div class="link-alpha">
