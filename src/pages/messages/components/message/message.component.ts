@@ -167,34 +167,47 @@ setCORS("http://cors-anywhere.herokuapp.com/");
       this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
+      case '1':
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '2':
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-CH&hl=zh-CH&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
      default:
       this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
     }
-     setTimeout(() => {
+    var tempsetinterval = setInterval(() => {
+      if (this.translated !== text) {
+        const data2: IChat = {
+          images,
+          value: this.translated,
+          type: this.chatType.TEXT,
+          sendAt: Date.now(),
+          uid: this.currentUser.uid
+        };
+        this.sendLoading = true;
+        if (text) {
+          this.messageService
+            .send({ ...this.message }, data2)
+            .then(() => {
+              this.textMsg = '';
+              this.sendLoading = false;
+             // this.autoReply(messages[this.getRandomInt(1, 50)]);
+            })
+            .catch((err) => this.failPromise(err));
+        }
+        this.translated = '';
+        clearInterval(tempsetinterval);
 
-      const data2: IChat = {
-        images,
-        value: this.translated,
-        type: this.chatType.TEXT,
-        sendAt: Date.now(),
-        uid: this.currentUser.uid
       };
-      this.sendLoading = true;
-      if (text) {
-        this.messageService
-          .send({ ...this.message }, data2)
-          .then(() => {
-            this.textMsg = '';
-            this.sendLoading = false;
-           // this.autoReply(messages[this.getRandomInt(1, 50)]);
-          })
-          .catch((err) => this.failPromise(err));
-      }
-    }, 1000);
+    }, 1);
 
-    this.translated = '';
+
+   
   }
 
   public async translatorOptions(){
@@ -214,6 +227,13 @@ setCORS("http://cors-anywhere.herokuapp.com/");
             text: 'French',
             handler: () => {
               this.score = '1';
+              
+            }
+          },
+          {
+            text: '중국어',
+            handler: () => {
+              this.score = '2';
               
             }
           }
