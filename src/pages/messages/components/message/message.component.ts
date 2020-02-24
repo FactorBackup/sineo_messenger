@@ -38,6 +38,7 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
   public images: string[] = [];
   public sendLoading: boolean;
   public translated: string = '';
+  public score: string = '4';
   public noDataconfig: INoData = {
     content: { title: 'Its quite here', description: 'start a conversation' }
   };
@@ -59,7 +60,7 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
     super(injector);
   }
 
-  score:any;
+
   public async ngOnInit() {
     this.loading = true;
     this.currentUser = await this.authService.getUser();
@@ -138,7 +139,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
   }
 
   /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */
-  public send(text: any, images = null, score) {
+  public send(text: any, images = null) {
     const data: IChat = {
       images,
       value: text,
@@ -158,8 +159,10 @@ setCORS("http://cors-anywhere.herokuapp.com/");
         .catch((err) => this.failPromise(err));
     }
 
+    //https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + this.sl + "&tl=" + this.targetlan + "&hl=" + this.targetlan + "&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated
+
     this.translated = text;
-    switch (score) {
+    switch (this.score) {
      case '0':
       this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
@@ -195,7 +198,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
   }
 
   public async translatorOptions(){
-    var score;
+
     const asCtrl = await this.actionSheetCtrl.create({
     
         header: 'language',
@@ -203,14 +206,14 @@ setCORS("http://cors-anywhere.herokuapp.com/");
           {
             text: 'English',
             handler: () => {
-              score = 0;
+              this.score = '0';
               
             }
           },
           {
             text: 'French',
             handler: () => {
-              score = 1;
+              this.score = '1';
               
             }
           }
@@ -344,7 +347,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
     Promise.all(read$)
       .then((res) => {
         this.images = res;
-        this.send(text, this.images,this.score);
+        this.send(text, this.images);
         this.loading = false;
       })
       .catch((err) => this.failPromise(err));
