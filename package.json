@@ -37,6 +37,7 @@
     "@ionic-native/android-permissions": "^5.16.0",
     "@ionic-native/call-number": "^5.15.1",
     "@ionic-native/camera": "^5.15.1",
+    "@ionic-native/contacts": "^5.21.6",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/facebook": "^5.15.0",
     "@ionic-native/firebase-x": "^5.16.0",
@@ -64,6 +65,7 @@
     "cordova-plugin-androidx": "^1.0.2",
     "cordova-plugin-androidx-adapter": "^1.1.0",
     "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-facebook4": "^6.2.0",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-firebasex": "^7.0.1",
@@ -178,7 +180,8 @@
       "call-number": {},
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.10.0"
-      }
+      },
+      "cordova-plugin-contacts": {}
     },
     "platforms": [
       "ios",
