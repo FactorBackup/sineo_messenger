@@ -71,6 +71,10 @@
       "ANDROID_CRASHLYTICS_VERSION": "2.10.1",
       "ANDROID_CRASHLYTICS_NDK_VERSION": "2.1.1",
       "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    },
+    "cordova-plugin-advanced-http": {
+      "OKHTTP_VERSION": "3.10.0",
+      "PACKAGE_NAME": "com.ezyapps.fullstarter"
     }
   },
   "dependent_plugins": {
@@ -81,6 +85,9 @@
       "PACKAGE_NAME": "com.ezyapps.fullstarter"
     },
     "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    },
+    "cordova-plugin-file": {
       "PACKAGE_NAME": "com.ezyapps.fullstarter"
     }
   }

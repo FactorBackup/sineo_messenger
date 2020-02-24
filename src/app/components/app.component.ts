@@ -6,6 +6,10 @@ import { Extender } from 'src/shared/helpers/extender';
 import { FcmService } from 'src/shared/services/fcm/fcm.service';
 import { AppService, IAppPages } from '../services/app/app.service';
 
+import { Platform } from '@ionic/angular';
+import { Toast } from '@ionic-native/toast/ngx';
+
+
 /**
  * @class AppComponent
  * @extends Extender
@@ -21,9 +25,18 @@ import { AppService, IAppPages } from '../services/app/app.service';
 })
 export class AppComponent extends Extender implements OnInit {
   public pages = [];
-  // public color: string = '#009688';
   public color: string = '#3232FF';
+
+  
+  public count: number = 0;
+
+
   constructor(
+
+    public readonly platform: Platform,
+    private nativeToast: Toast,
+
+
     protected injector: Injector,
     private appService: AppService,
     private authService: AuthService,
@@ -77,5 +90,30 @@ export class AppComponent extends Extender implements OnInit {
   /* Listen to incoming messages */
   private listen4Notifications() {
     this.subscriptions.push(this.fcmService.listenToNotifications().subscribe());
+  }
+  private exitFromApp() {
+
+    this.platform.backButton.subscribe(() => {
+
+      this.count++;
+
+      if (this.count === 1) {
+
+        this.nativeToast
+          .show(
+              '뒤로 가기 버튼을 한번 더 누르면 종료됩니다', 
+              '5000', 
+              'bottom')
+          .subscribe((toast) => {
+            console.log(toast);
+          });
+
+      } else if (this.count === 2) {
+        navigator['app'].exitApp();
+          setTimeout(function () {
+            this.count = 0;
+          }, 800);
+        }
+    });
   }
 }

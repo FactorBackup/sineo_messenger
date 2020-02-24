@@ -1,0 +1,53 @@
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-menu-button size="small" autoHide="true"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content scrollX="false" scrollY="false">
+  
+<!-- <img src="../../../../assets/images/new/Background1.jpg" id="bg" alt=""> -->
+
+  <div class="content-wrapper">
+    <div class="header no-border has-toolbar">
+      <div class="title">
+        Invite Chat
+      </div>
+      <div class="options">
+        <ion-button fill="clear" size="small" color="medium" (click)="openSearch = !openSearch">
+          <ion-icon mode="md" name="search"></ion-icon>
+        </ion-button>
+        </div>
+    </div>
+
+    <div class="wrapper" *ngIf="groupedPeople.length > 0">
+      <div class="content-scroll" #content>
+        <div class="group" *ngFor="let group of groupedPeople">
+          
+          <div class="contact" *ngFor="let contact of group.people; let i = index">
+            <div class="image" [image-loader]="contact.photoURL"></div>
+            <div class="detail">
+              <div class="name">{{ contact.displayName }}</div>
+            </div>
+
+            <div class="more">
+              <ion-button *ngIf="isFriend(contact.uid)" size="small" fill="clear" shape="round" (click)="addgroup">
+                <ion-checkbox></ion-checkbox>
+              </ion-button>
+              <ion-button *ngIf="!isFriend(contact.uid)" class="follow-btn" size="small" shape="round" (click)="manage(contact)">
+                {{ 'people-component.follow' | translate }}
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="link-alpha">
+        <li class="alpha-link-item" *ngFor="let item of alpha" (click)="scrollTo(item)">{{ item }}</li>
+      </div>
+    </div>
+    <app-no-data *ngIf="groupedPeople.length === 0"> </app-no-data>
+  </div>
+</ion-content>
+
+<app-spinner *ngIf="loading"></app-spinner>

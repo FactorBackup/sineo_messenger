@@ -10,7 +10,9 @@ import { CommonService } from 'src/shared/services/common/common.service';
 import { FirestoreService } from 'src/shared/services/firestore/firestore.service';
 import { CHAT_TYPES } from '../../models/message';
 import { MessagesService } from '../../services/messages/messages.service';
-import { setCORS } from "google-translate-api-browser";
+//import translate, { setCORS } from "google-translate-api-browser";
+import { HttpClient } from '@angular/common/http';
+//import { safeEval } from 'safe-eval';
 /**
  * send messages between users. as a user, you can deactivate autoreply in setting page.
  * or remove autoreply method and all calls to it.
@@ -19,9 +21,10 @@ import { setCORS } from "google-translate-api-browser";
  * check readme for info on cloud functions
  */
 let MessageComponent = class MessageComponent extends Extender {
-    constructor(injector, navParams, authService, commonService, firestoreService, messageService, settingService) {
+    constructor(injector, http, navParams, authService, commonService, firestoreService, messageService, settingService) {
         super(injector);
         this.injector = injector;
+        this.http = http;
         this.navParams = navParams;
         this.authService = authService;
         this.commonService = commonService;
@@ -32,6 +35,7 @@ let MessageComponent = class MessageComponent extends Extender {
         this.chatType = CHAT_TYPES;
         this.textMsg = '';
         this.images = [];
+        this.translated = '';
         this.noDataconfig = {
             content: { title: 'Its quite here', description: 'start a conversation' }
         };
@@ -53,22 +57,13 @@ let MessageComponent = class MessageComponent extends Extender {
                 this.loading = false;
                 this.toast(err);
             }));
-            const translate = setCORS("http://cors-anywhere.herokuapp.com/");
-            /*
-            // or
-            import translate, { setCORS } from "google-translate-api-browser";
-            setCORS("http://cors-anywhere.herokuapp.com/");
-            */
-            translate("안녕하세요", { to: "en" })
-                .then(res => {
-                // I do not eat six days
-                console.log(res.text);
-            })
-                .catch(err => {
-                console.error(err);
-            });
         });
     }
+    /*
+    // or
+    import translate, { setCORS } from "google-translate-api-browser";
+    setCORS("http://cors-anywhere.herokuapp.com/");
+    */
     /** scroll to bottom when view loads with messages */
     ngAfterContentChecked() {
         this.scrollToBottom();
@@ -139,6 +134,105 @@ let MessageComponent = class MessageComponent extends Extender {
             })
                 .catch((err) => this.failPromise(err));
         }
+        /*this.translated = text;
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+    
+         setTimeout(() => {
+    
+          const data2: IChat = {
+            images,
+            value: this.translated,
+            type: this.chatType.TEXT,
+            sendAt: Date.now(),
+            uid: this.currentUser.uid
+          };
+          this.sendLoading = true;
+          if (text) {
+            this.messageService
+              .send({ ...this.message }, data2)
+              .then(() => {
+                this.textMsg = '';
+                this.sendLoading = false;
+               // this.autoReply(messages[this.getRandomInt(1, 50)]);
+              })
+              .catch((err) => this.failPromise(err));
+          }
+        }, 1000);
+    
+        this.translated = '';*/
+    }
+    translatorOptions(text) {
+        return tslib_1.__awaiter(this, void 0, void 0, function* () {
+            const asCtrl = yield this.actionSheetCtrl.create({
+                header: 'language',
+                buttons: [
+                    {
+                        text: 'English',
+                        handler: () => {
+                            this.transen(this.send(text));
+                        }
+                    },
+                    {
+                        text: 'French',
+                        handler: () => {
+                            this.transfr(this.send(text));
+                        }
+                    }
+                ]
+            });
+            asCtrl.present();
+        });
+    }
+    transen(text) {
+        this.translated = text;
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+            .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error));
+        setTimeout(() => {
+            const data2 = {
+                value: this.translated,
+                type: this.chatType.TEXT,
+                sendAt: Date.now(),
+                uid: this.currentUser.uid
+            };
+            this.sendLoading = true;
+            if (text) {
+                this.messageService
+                    .send(Object.assign({}, this.message), data2)
+                    .then(() => {
+                    this.textMsg = '';
+                    this.sendLoading = false;
+                    // this.autoReply(messages[this.getRandomInt(1, 50)]);
+                })
+                    .catch((err) => this.failPromise(err));
+            }
+        }, 1000);
+        this.translated = '';
+    }
+    transfr(text) {
+        this.translated = text;
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+            .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error));
+        setTimeout(() => {
+            const data2 = {
+                value: this.translated,
+                type: this.chatType.TEXT,
+                sendAt: Date.now(),
+                uid: this.currentUser.uid
+            };
+            this.sendLoading = true;
+            if (text) {
+                this.messageService
+                    .send(Object.assign({}, this.message), data2)
+                    .then(() => {
+                    this.textMsg = '';
+                    this.sendLoading = false;
+                    // this.autoReply(messages[this.getRandomInt(1, 50)]);
+                })
+                    .catch((err) => this.failPromise(err));
+            }
+        }, 1000);
+        this.translated = '';
     }
     /** for browser input file on change, run this method to get base64 string of files
      * and open gallery modal with the images
@@ -178,6 +272,31 @@ let MessageComponent = class MessageComponent extends Extender {
             });
             yield actionSheet.present();
         });
+    }
+    translateen(text) {
+        this.translated = text;
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+            .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error));
+        setTimeout(() => {
+            const data2 = {
+                value: this.translated,
+                type: this.chatType.TEXT,
+                sendAt: Date.now(),
+                uid: this.currentUser.uid
+            };
+            this.sendLoading = true;
+            if (text) {
+                this.messageService
+                    .send(Object.assign({}, this.message), data2)
+                    .then(() => {
+                    this.textMsg = '';
+                    this.sendLoading = false;
+                    // this.autoReply(messages[this.getRandomInt(1, 50)]);
+                })
+                    .catch((err) => this.failPromise(err));
+            }
+        }, 1000);
+        this.translated = '';
     }
     /** open preview image modal */
     preview(image) {
@@ -293,6 +412,7 @@ MessageComponent = tslib_1.__decorate([
         styleUrls: ['./message.component.scss']
     }),
     tslib_1.__metadata("design:paramtypes", [Injector,
+        HttpClient,
         NavParams,
         AuthService,
         CommonService,

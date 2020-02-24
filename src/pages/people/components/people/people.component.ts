@@ -88,7 +88,9 @@ export class PeopleComponent extends Extender implements OnInit {
       })
     );
   }
-
+  public gotoinvitechatuser() {
+		this.router.navigateByUrl('/invite-group');
+	}
   /** search list of users by name and regroup into alphabet categories */
   public onSearch(val: string): void {
     let people: IUser[];

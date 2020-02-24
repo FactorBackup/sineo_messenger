@@ -19,7 +19,7 @@ let LoginComponent = class LoginComponent extends Extender {
         this.fbLoading = false;
         this.gplusLoading = false;
         this.model = {
-            email: 'hello@ezyapps.co.uk',
+            email: 'sineo@sineo.com',
             password: 'password123'
         };
         this.rememberMe = false;
@@ -27,7 +27,8 @@ let LoginComponent = class LoginComponent extends Extender {
             this.loading = false;
             this.fbLoading = false;
             this.gplusLoading = false;
-            this.goto(this.routes.dashboard);
+            // this.goto(this.routes.dashboard);
+            this.goto(this.routes.messages); //kjm
         };
         this.failPromise = (err) => {
             this.fbLoading = false;

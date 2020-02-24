@@ -22,11 +22,12 @@
         height: 100% !important;
         width: 100%;
         overflow: auto;
+        
         .group {
           display: flex;
           flex-direction: column;
 
-          .title {
+          .title { 
             font-size: 22px;
             font-weight: 600;
             padding: 10px 0 5px 30px;
@@ -36,16 +37,13 @@
           .contact {
             margin: 5px 20px 5px 0;
             display: flex;
-            padding: 10px 10px 10px 15px;
-            box-shadow: 1px 1px 12px var(--ion-color-light-shade);
-            align-items: center;
+            padding: 5px 10px 5px 15px;
 
             .image {
-              width: 55px;
-              height: 55px;
-              border-radius: 6px;
+              width: 40px;
+							height: 40px;
+							border-radius: 50%;
               background-size: cover !important;
-              box-shadow: 1px 1px 12px var(--ion-color-light-shade);
             }
 
             .detail {
@@ -55,10 +53,11 @@
               flex: 1;
 
               .name {
-                font-size: 14px;
+                font-size: 16px;
                 font-weight: 500;
                 padding: 0 0 4px 0;
               }
+
 
               .job {
                 font-size: 11px;

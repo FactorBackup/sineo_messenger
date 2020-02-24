@@ -23,7 +23,8 @@ let AuthComponent = class AuthComponent extends Extender {
             this.loading = false;
             this.fbLoading = false;
             this.gplusLoading = false;
-            this.goto(this.routes.dashboard);
+            // this.goto(this.routes.dashboard);
+            this.goto(this.routes.messages); //kjm
         };
         /** common failed promise callback */
         this.failPromise = (err) => {

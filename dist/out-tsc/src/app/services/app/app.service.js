@@ -71,6 +71,12 @@ let AppService = class AppService extends Extender {
                 component: 'logout',
                 icon: 'lock',
                 image: false
+            },
+            {
+                title: this.translate.instant('page-title.translator'),
+                component: 'translator',
+                icon: 'text',
+                image: false
             }
         ];
     }

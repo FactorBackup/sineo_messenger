@@ -8,7 +8,7 @@ import { IChat, IMessage } from '../../models/message';
 import { MessagesService } from '../../services/messages/messages.service';
 import { MessageComponent } from '../message/message.component';
 
-/**
+/*
  * view users messages, manage messages.
  */
 @Component({

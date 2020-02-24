@@ -12,7 +12,10 @@ import { CommonService } from 'src/shared/services/common/common.service';
 import { FirestoreService } from 'src/shared/services/firestore/firestore.service';
 import { CHAT_TYPES, IChat, IMessage } from '../../models/message';
 import { MessagesService } from '../../services/messages/messages.service';
-import { setCORS } from "google-translate-api-browser";
+//import translate, { setCORS } from "google-translate-api-browser";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Button } from 'protractor';
+//import { safeEval } from 'safe-eval';
 
 /**
  * send messages between users. as a user, you can deactivate autoreply in setting page.
@@ -34,6 +37,7 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
   public textMsg: string = '';
   public images: string[] = [];
   public sendLoading: boolean;
+  public translated: string = '';
   public noDataconfig: INoData = {
     content: { title: 'Its quite here', description: 'start a conversation' }
   };
@@ -41,8 +45,10 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
   @ViewChild('callNumber', null) public callNumber: ElementRef;
   @ViewChild('fileInputButton', null) private fileInputButton: ElementRef;
 
+
   constructor(
     protected injector: Injector,
+    private http: HttpClient,
     private navParams: NavParams,
     private authService: AuthService,
     private commonService: CommonService,
@@ -53,6 +59,7 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
     super(injector);
   }
 
+  score:any;
   public async ngOnInit() {
     this.loading = true;
     this.currentUser = await this.authService.getUser();
@@ -69,22 +76,13 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
         }
       )
     )
-    const translate = setCORS("http://cors-anywhere.herokuapp.com/");
+      }
 /*
 // or
 import translate, { setCORS } from "google-translate-api-browser";
 setCORS("http://cors-anywhere.herokuapp.com/");
 */
-translate('안녕하세요', { to: "en" })
-  .then(res => {
-    // I do not eat six days
-    console.log(res.text)
-  })
-  .catch(err => {
-    console.error(err);
-  });
-}
-  
+
 
   /** scroll to bottom when view loads with messages */
   public ngAfterContentChecked() {
@@ -140,7 +138,7 @@ translate('안녕하세요', { to: "en" })
   }
 
   /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */
-  public send(text: any, images = null) {
+  public send(text: any, images = null, score) {
     const data: IChat = {
       images,
       value: text,
@@ -159,8 +157,71 @@ translate('안녕하세요', { to: "en" })
         })
         .catch((err) => this.failPromise(err));
     }
+
+    this.translated = text;
+    switch (score) {
+     case '0':
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+     default:
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+    }
+     setTimeout(() => {
+
+      const data2: IChat = {
+        images,
+        value: this.translated,
+        type: this.chatType.TEXT,
+        sendAt: Date.now(),
+        uid: this.currentUser.uid
+      };
+      this.sendLoading = true;
+      if (text) {
+        this.messageService
+          .send({ ...this.message }, data2)
+          .then(() => {
+            this.textMsg = '';
+            this.sendLoading = false;
+           // this.autoReply(messages[this.getRandomInt(1, 50)]);
+          })
+          .catch((err) => this.failPromise(err));
+      }
+    }, 1000);
+
+    this.translated = '';
   }
 
+  public async translatorOptions(){
+    var score;
+    const asCtrl = await this.actionSheetCtrl.create({
+    
+        header: 'language',
+        buttons: [
+          {
+            text: 'English',
+            handler: () => {
+              score = 0;
+              
+            }
+          },
+          {
+            text: 'French',
+            handler: () => {
+              score = 1;
+              
+            }
+          }
+          
+        ]
+      });
+      
+      asCtrl.present();
+      
+    }
+    
   /** for browser input file on change, run this method to get base64 string of files
    * and open gallery modal with the images
    */
@@ -199,12 +260,7 @@ translate('안녕하세요', { to: "en" })
     });
     await actionSheet.present();
   }
-
-  /** open preview image modal */
-  public async preview(image: string) {
-    const modal = await this.openModal(ImagePreviewComponent, image);
-    modal.present();
-  }
+  
 
   /** auto reply to message */
  /* public autoReply(text: any, images = null) {
@@ -288,7 +344,7 @@ translate('안녕하세요', { to: "en" })
     Promise.all(read$)
       .then((res) => {
         this.images = res;
-        this.send(text, this.images);
+        this.send(text, this.images,this.score);
         this.loading = false;
       })
       .catch((err) => this.failPromise(err));

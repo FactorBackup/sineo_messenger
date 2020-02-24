@@ -57,6 +57,9 @@ let PeopleComponent = class PeopleComponent extends Extender {
             }
         }));
     }
+    gotoinvitechatuser() {
+        this.router.navigateByUrl('/invite-group');
+    }
     /** search list of users by name and regroup into alphabet categories */
     onSearch(val) {
         let people;

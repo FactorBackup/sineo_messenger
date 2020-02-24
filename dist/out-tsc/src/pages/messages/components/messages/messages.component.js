@@ -6,7 +6,7 @@ import { AuthService } from 'src/pages/auth/services/auth/auth.service';
 import { Extender } from 'src/shared/helpers/extender';
 import { MessagesService } from '../../services/messages/messages.service';
 import { MessageComponent } from '../message/message.component';
-/**
+/*
  * view users messages, manage messages.
  */
 let MessagesComponent = class MessagesComponent extends Extender {

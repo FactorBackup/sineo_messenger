@@ -17,6 +17,7 @@ import { NativeImports } from 'src/shared/helpers/native';
 import { SharedModule } from 'src/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
+import { Toast } from '@ionic-native/toast/ngx';
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -63,7 +64,8 @@ AppModule = tslib_1.__decorate([
             {
                 provide: HAMMER_GESTURE_CONFIG,
                 useClass: IonicGestureConfig
-            }
+            },
+            Toast
         ],
         bootstrap: [AppComponent]
     })

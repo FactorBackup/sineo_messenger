@@ -20,7 +20,7 @@ export class LoginComponent extends Extender implements OnInit {
   public gplusLoading: boolean = false;
   public emailVerified: string;
   public model: { email: string; password: string } = {
-    email: 'hello@ezyapps.co.uk',
+    email: 'sineo@sineo.com',
     password: 'password123'
   };
   public rememberMe: boolean = false;
@@ -90,7 +90,8 @@ export class LoginComponent extends Extender implements OnInit {
     this.loading = false;
     this.fbLoading = false;
     this.gplusLoading = false;
-    this.goto(this.routes.dashboard);
+    // this.goto(this.routes.dashboard);
+    this.goto(this.routes.messages); //kjm
   };
 
   private failPromise = (err: any) => {

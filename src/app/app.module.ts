@@ -17,6 +17,8 @@ import { SharedModule } from 'src/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
 
+import { Toast } from '@ionic-native/toast/ngx';
+
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -60,7 +62,8 @@ import { AppComponent } from './components/app.component';
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: IonicGestureConfig
-    }
+    },
+    Toast
   ],
   bootstrap: [AppComponent]
 })

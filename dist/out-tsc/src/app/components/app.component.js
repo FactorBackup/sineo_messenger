@@ -6,6 +6,8 @@ import { SettingService } from 'src/pages/setting/services/setting/setting.servi
 import { Extender } from 'src/shared/helpers/extender';
 import { FcmService } from 'src/shared/services/fcm/fcm.service';
 import { AppService } from '../services/app/app.service';
+import { Platform } from '@ionic/angular';
+import { Toast } from '@ionic-native/toast/ngx';
 /**
  * @class AppComponent
  * @extends Extender
@@ -15,8 +17,10 @@ import { AppService } from '../services/app/app.service';
  * we also register fire cloud messaging and token and listen for notifications in-app.
  */
 let AppComponent = class AppComponent extends Extender {
-    constructor(injector, appService, authService, fcmService, settingService, storage) {
+    constructor(platform, nativeToast, injector, appService, authService, fcmService, settingService, storage) {
         super(injector);
+        this.platform = platform;
+        this.nativeToast = nativeToast;
         this.injector = injector;
         this.appService = appService;
         this.authService = authService;
@@ -24,7 +28,8 @@ let AppComponent = class AppComponent extends Extender {
         this.settingService = settingService;
         this.storage = storage;
         this.pages = [];
-        this.color = '#009688';
+        this.color = '#3232FF';
+        this.count = 0;
     }
     /**
      * run initializeApp from appServices
@@ -67,6 +72,24 @@ let AppComponent = class AppComponent extends Extender {
     listen4Notifications() {
         this.subscriptions.push(this.fcmService.listenToNotifications().subscribe());
     }
+    exitFromApp() {
+        this.platform.backButton.subscribe(() => {
+            this.count++;
+            if (this.count === 1) {
+                this.nativeToast
+                    .show('뒤로 가기 버튼을 한번 더 누르면 종료됩니다', '5000', 'bottom')
+                    .subscribe((toast) => {
+                    console.log(toast);
+                });
+            }
+            else if (this.count === 2) {
+                navigator['app'].exitApp();
+                setTimeout(function () {
+                    this.count = 0;
+                }, 800);
+            }
+        });
+    }
 };
 AppComponent = tslib_1.__decorate([
     Component({
@@ -74,7 +97,9 @@ AppComponent = tslib_1.__decorate([
         templateUrl: 'app.component.html',
         styleUrls: ['app.component.scss']
     }),
-    tslib_1.__metadata("design:paramtypes", [Injector,
+    tslib_1.__metadata("design:paramtypes", [Platform,
+        Toast,
+        Injector,
         AppService,
         AuthService,
         FcmService,
