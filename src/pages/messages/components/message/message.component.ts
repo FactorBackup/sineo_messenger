@@ -164,7 +164,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
     this.translated = text;
     switch (this.score) {
      case '0':
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ko&hl=ko&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
       case '1':
@@ -176,8 +176,9 @@ setCORS("http://cors-anywhere.herokuapp.com/");
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
      default:
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
       .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      
       break;
     }
     var tempsetinterval = setInterval(() => {
@@ -219,25 +220,31 @@ setCORS("http://cors-anywhere.herokuapp.com/");
           {
             text: 'English',
             handler: () => {
-              this.score = '0';
+              this.score = '3';
               
             }
           },
           {
-            text: 'French',
+            text: 'France',
             handler: () => {
               this.score = '1';
               
             }
           },
           {
-            text: '중국어',
+            text: '中國',
             handler: () => {
               this.score = '2';
               
             }
+          }, 
+          {
+            text: '한국어',
+            handler: () => {
+              this.score = '0';
+              
+            }
           }
-          
         ]
       });
       
