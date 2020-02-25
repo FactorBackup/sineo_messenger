@@ -38,6 +38,51 @@ export class PersonComponent extends Extender implements OnInit {
     this.user = await this.peopleService.getPerson(uid);
   }
 
+
+  random(): string {
+		//	let rand = Math.floor(Math.random()*20.0)+1.0;
+		//	return rand;
+		return (
+			Math.random()
+				.toString(36)
+				.substring(2, 15) +
+			Math.random()
+				.toString(36)
+				.substring(2, 15)
+		);
+  }
+
+
+  /*
+
+	public async voicecall() {
+		const sessionToken = this.random();
+		let videocall = false;
+		this.callService.startCall(this.user, sessionToken, videocall);
+		this.router.navigate(['/voice-room/' + sessionToken + '/voice']);
+		this.closeModal();
+	}
+
+	///////////////// obtain the sessionToken and open video chat room
+	public async call() {
+		const sessionToken = this.random();
+		let videocall = true;
+		this.callService.startCall(this.user, sessionToken, videocall);
+		this.router.navigate(['/video-room/' + sessionToken + '/video']);
+		this.closeModal();
+  }
+  
+  /*
+  	{
+		path: 'video-room/:roomName/video',
+		loadChildren: '../video-room/video-room.module#VideoRoomPageModule'
+	},
+	{
+		path: 'voice-room/:roomName/voice',
+    loadChildren: '../voice-room/video-room.module#VideoRoomPageModule'
+    */
+
+  
   /** call user */
   public async call() {
     await this.commonService.callUser(this.user.mobile || this.user.phone, this.callNumber);
