@@ -252,4 +252,13 @@ export class PeopleComponent extends Extender implements OnInit {
       });
     }
   }
+
+  public async socialshare() {
+
+    const messageval = ' Join Sineo Messenger for auto-translated messaging ';
+    await this.commonService.share('', '', '', messageval);
+    this.closeModal();
+
+  }
+
 }
