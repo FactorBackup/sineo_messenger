@@ -38,7 +38,7 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
   public images: string[] = [];
   public sendLoading: boolean;
   public translated: string = '';
-  public score: string = '4';
+  public score: string = '100';
   public noDataconfig: INoData = {
     content: { title: 'Its quite here', description: 'start a conversation' }
   };
@@ -164,20 +164,116 @@ setCORS("http://cors-anywhere.herokuapp.com/");
     this.translated = text;
     switch (this.score) {
      case '0':
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
-      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ko&hl=ko&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
       case '1':
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
-      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
       case '2':
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-CH&hl=zh-CH&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
-      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-CH&hl=zh-CH&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
-     default:
-      this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fr&hl=fr&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
-      .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      case '3':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=zh-TW&hl=zh-TW&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '4':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&hl=ja&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '5':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=el&hl=el&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '6':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=cs&hl=cs&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '7':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=sv&hl=sv&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '8':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=pt&hl=pt&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '9':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=it&hl=it&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '10':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=de&hl=de&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '11':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=mn&hl=mn&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '12':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=nl&hl=nl&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '13':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=id&hl=id&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '14':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=uk&hl=uk&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '15':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fi&hl=fi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '16':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ar&hl=ar&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '17':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=vi&hl=vi&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '18':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ru&hl=ru&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '19':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=th&hl=th&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '20':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=gl&hl=gl&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '21':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=mg&hl=mg&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '22':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=sn&hl=sn&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '23':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=am&hl=am&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '24':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ps&hl=ps&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '25':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=gu&hl=gu&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      case '26':
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ml&hl=ml&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
+      break;
+      default:
+        this.http.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=en&hl=en&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&ie=UTF-8&oe=UTF-8&otf=1&ssel=0&tsel=0&kc=7&q=" + this.translated)
+        .toPromise().then((tempval) => { this.translated = JSON.stringify(tempval[0][0][0]); }).catch((error) => console.log(error) );
       break;
     }
     var tempsetinterval = setInterval(() => {
@@ -219,21 +315,196 @@ setCORS("http://cors-anywhere.herokuapp.com/");
           {
             text: 'English',
             handler: () => {
-              this.score = '0';
-              
+              this.score = '100';      
             }
           },
           {
-            text: 'French',
+            text: 'France',
             handler: () => {
               this.score = '1';
               
             }
           },
           {
-            text: '중국어',
+            text: 'China (Simplified)',
             handler: () => {
               this.score = '2';
+              
+            }
+          }, 
+          {
+            text: 'China (Traditional)',
+            handler: () => {
+              this.score = '3';
+              
+            }
+          },
+          {
+            text: 'Korean',
+            handler: () => {
+              this.score = '0';
+              
+            }
+          },
+
+          {
+            text: 'Japenese',
+            handler: () => {
+              this.score = '4';
+              
+            }
+          },
+          
+          {
+            text: 'Greek',
+            handler: () => {
+              this.score = '5';
+              
+            }
+          }, 
+          {
+            text: 'Czech',
+            handler: () => {
+              this.score = '6';
+              
+            }
+          },{
+            text: 'Swedish',
+            handler: () => {
+              this.score = '7';
+              
+            }
+          },
+          {
+            text: 'Portuguese',
+            handler: () => {
+              this.score = '8';
+              
+            }
+          },
+          {
+            text: 'Italian',
+            handler: () => {
+              this.score = '9';
+              
+            }
+          }, 
+          {
+            text: 'German',
+            handler: () => {
+              this.score = '10';
+              
+            }
+          },
+          {
+            text: 'Mongolia',
+            handler: () => {
+              this.score = '11';
+              
+            }
+          },
+          {
+            text: 'Dutch',
+            handler: () => {
+              this.score = '12';
+              
+            }
+          },
+          
+          {
+            text: 'Indonesia',
+            handler: () => {
+              this.score = '13';
+              
+            }
+          }, 
+          {
+            text: 'Ukrainian',
+            handler: () => {
+              this.score = '14';
+              
+            }
+          },{
+            text: 'Finland',
+            handler: () => {
+              this.score = '15';
+              
+            }
+          },
+          {
+            text: 'Arabic',
+            handler: () => {
+              this.score = '16';
+              
+            }
+          },
+          {
+            text: 'Vietnamese',
+            handler: () => {
+              this.score = '17';
+              
+            }
+          }, 
+          {
+            text: 'Russian',
+            handler: () => {
+              this.score = '18';
+              
+            }
+          },
+          {
+            text: 'Thai',
+            handler: () => {
+              this.score = '19';
+              
+            }
+          },
+          {
+            text: 'Galicia',
+            handler: () => {
+              this.score = '20';
+              
+            }
+          },
+          {
+            text: 'Malagasy',
+            handler: () => {
+              this.score = '21';
+              
+            }
+          },
+          {
+            text: 'Shona',
+            handler: () => {
+              this.score = '22';
+              
+            }
+          }, 
+          {
+            text: 'Amharic',
+            handler: () => {
+              this.score = '23';
+              
+            }
+          },
+          {
+            text: 'Pashto',
+            handler: () => {
+              this.score = '24';
+              
+            }
+          },
+          {
+            text: 'Gujarat',
+            handler: () => {
+              this.score = '25';
+              
+            }
+          }, 
+          {
+            text: 'Malayalam',
+            handler: () => {
+              this.score = '26';
               
             }
           }

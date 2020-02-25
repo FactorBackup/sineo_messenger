@@ -98,9 +98,9 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-telerik-imagepicker/fullstarter-ignorelinterrors.gradle"
-apply from: "../cordova-plugin-telerik-imagepicker/fullstarter-androidtarget.gradle"
-apply from: "../cordova-plugin-firebasex/fullstarter-build.gradle"
+apply from: "../cordova-plugin-firebasex/messager-build.gradle"
+apply from: "../cordova-plugin-telerik-imagepicker/messager-ignorelinterrors.gradle"
+apply from: "../cordova-plugin-telerik-imagepicker/messager-androidtarget.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()
@@ -296,11 +296,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
-    implementation "com.google.android.gms:play-services-auth:15.0.1"
-    implementation "com.google.android.gms:play-services-identity:15.0.1"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.10.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation "androidx.appcompat:appcompat:1.0.0"
-    implementation "androidx.annotation:annotation:1.0.0"
     implementation "com.facebook.android:facebook-android-sdk:5.5.2"
     implementation "com.google.android.gms:play-services-tagmanager:17.0.0"
     implementation "com.google.firebase:firebase-analytics:17.2.1"
@@ -310,7 +307,10 @@ dependencies {
     implementation "com.google.firebase:firebase-auth:19.1.0"
     implementation "com.crashlytics.sdk.android:crashlytics:2.10.1"
     implementation "com.crashlytics.sdk.android:crashlytics-ndk:2.1.1"
-    implementation "com.squareup.okhttp3:okhttp-urlconnection:3.10.0"
+    implementation "com.google.android.gms:play-services-auth:15.0.1"
+    implementation "com.google.android.gms:play-services-identity:15.0.1"
+    implementation "androidx.annotation:annotation:1.0.0"
+    implementation "androidx.appcompat:appcompat:1.0.0"
     // SUB-PROJECT DEPENDENCIES END
 }
 
@@ -373,5 +373,3 @@ for (def func : cdvPluginPostBuildExtras) {
 if (hasProperty('postBuildExtras')) {
     postBuildExtras()
 }
-
-

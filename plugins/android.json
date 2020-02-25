@@ -7,55 +7,29 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-googleplus": {
-      "PLAY_SERVICES_VERSION": "15.0.1",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
     "call-number": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-advanced-http": {
+      "OKHTTP_VERSION": "3.10.0",
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-camera": {
       "ANDROID_SUPPORT_V4_VERSION": "27.+",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
-    "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-telerik-imagepicker": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-x-socialsharing": {
-      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-ionic-webview": {
-      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
-    },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-facebook4": {
-      "APP_ID": "866050457104922",
-      "APP_NAME": "ezy-apps.uk",
+      "APP_ID": "2684190931649903",
+      "APP_NAME": "login",
       "FACEBOOK_HYBRID_APP_EVENTS": "false",
       "FACEBOOK_ANDROID_SDK_VERSION": "5.5.2",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-firebasex": {
       "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
@@ -70,25 +44,54 @@
       "ANDROID_FIREBASE_AUTH_VERSION": "19.1.0",
       "ANDROID_CRASHLYTICS_VERSION": "2.10.1",
       "ANDROID_CRASHLYTICS_NDK_VERSION": "2.1.1",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
-    "cordova-plugin-advanced-http": {
-      "OKHTTP_VERSION": "3.10.0",
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-googleplus": {
+      "PLAY_SERVICES_VERSION": "15.0.1",
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-ionic-webview": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+",
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-telerik-imagepicker": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+      "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.factor.messager"
     }
   },
   "dependent_plugins": {
-    "es6-promise-plugin": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-androidx": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
     "cordova-plugin-androidx-adapter": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+      "PACKAGE_NAME": "com.factor.messager"
     },
-    "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.ezyapps.fullstarter"
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.factor.messager"
     }
   }
 }
