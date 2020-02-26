@@ -88,9 +88,13 @@ export class AppComponent extends Extender implements OnInit {
   }
 
   /* Listen to incoming messages */
+
+  /*
   private listen4Notifications() {
     this.subscriptions.push(this.fcmService.listenToNotifications().subscribe());
   }
+
+  */
   private exitFromApp() {
 
     this.platform.backButton.subscribe(() => {
@@ -116,4 +120,45 @@ export class AppComponent extends Extender implements OnInit {
         }
     });
   }
+
+
+
+
+
+	/* Listen to incoming messages */
+	private listen4Notifications() {
+		this.subscriptions.push(
+			this.fcmService.listenToNotifications().subscribe((message) => {
+				console.log(message);
+				if (message.messageType === 'data') {
+					// route to answer call page
+					// alert(
+					// 	message.messageType +
+					// 		' ' +
+					// 		message.sessionToken +
+					// 		' ' +
+					// 		message.video
+					// );
+					const videocall: boolean =
+						message.video == 'true' ? true : false;
+					if (videocall) {
+						this.router.navigateByUrl(
+							'/video-room/' + message.sessionToken + '/video'
+						);
+					} else {
+						this.router.navigateByUrl(
+							'/voice-room/' + message.sessionToken + '/voice'
+						);
+					}
+				}
+			})
+		);
+	}
+
+
+
+
+
+
+
 }
