@@ -18,10 +18,15 @@ let LoginComponent = class LoginComponent extends Extender {
         this.provider = SocialAuthProvider;
         this.fbLoading = false;
         this.gplusLoading = false;
+        // this.model = {
+        //     email: 'sineo@sineo.com',
+        //     password: 'password123'
+        // };
         this.model = {
-            email: 'sineo@sineo.com',
-            password: 'password123'
+            email: '이메일',
+            password: ''
         };
+
         this.rememberMe = false;
         this.successPromise = () => {
             this.loading = false;

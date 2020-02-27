@@ -30,7 +30,7 @@
           <!-- <div class="title" [id]="group.letter">{{ group.letter }}</div> --> <!--kjm-->
           <div class="contact" *ngFor="let contact of group.people; let i = index">
             <div class="image" [image-loader]="contact.photoURL" (click)="open(contact.uid)"></div>
-            <div class="detail" (click)="open(contact.uid)">
+            <div class="detail" (click)="startChat(contact)">
               <div class="name">{{ contact.displayName }}</div>
               <div class="city" *ngIf="contact.town">{{ contact.town }}</div>
               <div class="country" *ngIf="contact.country">{{ contact.country }}</div>
@@ -87,4 +87,37 @@
   </div>
 </ion-content>
 
+<ion-footer>
+  
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="schedule" (click)="goto(routes.dashboard)">
+      <ion-icon src="../../../../assets/icons/calendar.svg"></ion-icon>
+      <ion-label>{{ 'page-title.dashboard' | translate }}</ion-label>
+    </ion-tab-button>
+    
+    <ion-tab-button tab="news" (click)="goto(routes.feed)">
+      <ion-icon src="../../../../assets/icons/rss.svg"></ion-icon>
+      <ion-label>{{ 'page-title.news' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="people" (click)="goto(routes.people)">
+      <ion-icon src="../../../../assets/icons/users.svg"></ion-icon>
+      <ion-label>{{ 'page-title.people' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="about" (click)="goto(routes.messages)">
+      <ion-icon src="../../../../assets/icons/message-square.svg"></ion-icon>
+      <ion-label>{{ 'page-title.chat' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="about" (click)="goto(routes.setting)">
+      <ion-icon src="../../../../assets/icons/settings.svg" ></ion-icon>
+      <ion-label>{{ 'page-title.setting' | translate }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-footer>
+
 <app-spinner *ngIf="loading"></app-spinner>
+
+

@@ -34,6 +34,7 @@
         (press)="onMessageHold(item)"
       >
         <div [ngClass]="item.uid === currentUser.uid ? 'from-me' : 'from-them'">
+          
           <!-- message image -->
           <div
             class="image"

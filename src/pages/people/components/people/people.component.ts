@@ -261,4 +261,9 @@ export class PeopleComponent extends Extender implements OnInit {
 
   }
 
+  //kjm
+  public startChat(contact: IUser) {
+    this.messageService.startChat(contact);
+  }
+
 }

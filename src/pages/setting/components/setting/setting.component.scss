@@ -5,7 +5,8 @@
       height: 100%;
 
       .content-scroll {
-        height: calc(100% - 90px) !important;
+        //height: calc(100% - 90px) !important;
+        height: calc(100% - 0px) !important;
         width: 100%;
         padding: 0 15px;
         app-panel {
