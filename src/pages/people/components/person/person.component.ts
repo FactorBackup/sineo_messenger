@@ -6,7 +6,7 @@ import { MessagesService } from 'src/pages/messages/services/messages/messages.s
 import { Extender } from 'src/shared/helpers/extender';
 import { CommonService } from 'src/shared/services/common/common.service';
 import { PeopleService } from '../../services/people/people.service';
-
+import { CallsService } from '../../../messages/services/calls/calls.service';
 /**
  * view users profile and call, follow, unfollow share or chat to user
  */
@@ -26,7 +26,8 @@ export class PersonComponent extends Extender implements OnInit {
     private authService: AuthService,
     private peopleService: PeopleService,
     private messageService: MessagesService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private callService: CallsService
   ) {
     super(injector);
   }
@@ -53,8 +54,6 @@ export class PersonComponent extends Extender implements OnInit {
   }
 
 
-  /*
-
 	public async voicecall() {
 		const sessionToken = this.random();
 		let videocall = false;
@@ -70,24 +69,21 @@ export class PersonComponent extends Extender implements OnInit {
 		this.callService.startCall(this.user, sessionToken, videocall);
 		this.router.navigate(['/video-room/' + sessionToken + '/video']);
 		this.closeModal();
-  }
-  
-  /*
-  	{
-		path: 'video-room/:roomName/video',
-		loadChildren: '../video-room/video-room.module#VideoRoomPageModule'
-	},
-	{
-		path: 'voice-room/:roomName/voice',
-    loadChildren: '../voice-room/video-room.module#VideoRoomPageModule'
-    */
+	}
 
   
+
+  
+  /*
   /** call user */
+  /*
   public async call() {
     await this.commonService.callUser(this.user.mobile || this.user.phone, this.callNumber);
     this.closeModal();
   }
+  */
+
+
 
   /** chat to user */
   public async chat() {

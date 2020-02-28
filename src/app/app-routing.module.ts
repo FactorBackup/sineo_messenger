@@ -17,6 +17,14 @@ const routes: Routes = [
     redirectTo: 'welcome',
     pathMatch: 'full'
   },
+	{
+		path: 'video-room/:roomName/video',
+		loadChildren: './video-room/video-room.module#VideoRoomPageModule'
+	},
+	{
+		path: 'voice-room/:roomName/voice',
+		loadChildren: './voice-room/video-room.module#VideoRoomPageModule'
+	},
   {
     canActivate: [WelcomeGuard],
     path: 'welcome',
@@ -56,7 +64,8 @@ const routes: Routes = [
     path: 'setting',
     loadChildren: () => import('../pages/setting/setting.module').then((m) => m.SettingModule)
   },
-  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' },  { path: 'invite-group', loadChildren: './invite-group/invite-group.module#InviteGroupPageModule' }
+  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' },
+  { path: 'invite-group', loadChildren: './invite-group/invite-group.module#InviteGroupPageModule' }
 
 ];
 

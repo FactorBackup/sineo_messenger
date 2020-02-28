@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { Extender } from '../../../../shared/helpers/extender';
 import { FirestoreService } from '../../../../shared/services/firestore/firestore.service';
-//import { IUser } from 'app/pages/auth/helpers/model';
+import { IUser } from '../../../auth/helpers/model';
 import { ICall } from '../../models/call';
 
 @Injectable({
@@ -16,9 +16,10 @@ export class CallsService extends Extender {
 	) {
 		super(injector);
 	}
-	/*
+
+	
 	public async startCall(
-//		user: IUser,
+		user: IUser,
 		sessionToken: string,
 		videocall: boolean
 	) {
@@ -27,7 +28,7 @@ export class CallsService extends Extender {
 
 	
 	private async createCall(
-//		user: IUser,
+		user: IUser,
 		sessionToken: string,
 		videocall: boolean
 	) {
@@ -38,5 +39,8 @@ export class CallsService extends Extender {
 			video: videocall? "true": "false"
 		});
 	}
-	*/
+
+
+
+
 }
