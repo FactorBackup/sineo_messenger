@@ -19,6 +19,11 @@ import { AppComponent } from './components/app.component';
 
 import { Toast } from '@ionic-native/toast/ngx';
 
+import { VideoRoomPageModule } from './video-room/video-room.module';
+import { VoiceRoomPageModule } from './voice-room/video-room.module';
+
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -54,7 +59,10 @@ import { Toast } from '@ionic-native/toast/ngx';
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    VideoRoomPageModule,
+    VoiceRoomPageModule
+
   ],
   providers: [
     NativeImports,
@@ -63,7 +71,8 @@ import { Toast } from '@ionic-native/toast/ngx';
       provide: HAMMER_GESTURE_CONFIG,
       useClass: IonicGestureConfig
     },
-    Toast
+    Toast,
+    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })

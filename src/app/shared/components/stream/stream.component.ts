@@ -3,22 +3,21 @@ import { UserModel } from '../../models/user-model';
 import { OpenViduVideoComponent } from './ov-video.component';
 
 @Component({
-	selector: 'stream-component',
-	templateUrl: './stream.component.html',
-	styleUrls: ['./stream.component.scss']
+    selector: 'stream-component',
+    templateUrl: './stream.component.html',
+    styleUrls: ['./stream.component.scss'],
 })
 export class StreamComponent implements OnInit {
-	@Input()
-	user: UserModel;
+    @Input()
+    user: UserModel;
 
-	@ViewChild('videoComponent', { static: false })
-	videoComponent: OpenViduVideoComponent;
+    @ViewChild('videoComponent', {static: false}) videoComponent: OpenViduVideoComponent;
 
-	mutedSound: boolean;
+    mutedSound: boolean;
 
-	constructor() {}
+    constructor() {}
 
-	ngOnInit() {
-		console.log('user', this.user);
-	}
+    ngOnInit() {
+        console.log('user', this.user);
+    }
 }

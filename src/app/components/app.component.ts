@@ -74,6 +74,11 @@ export class AppComponent extends Extender implements OnInit {
     );
   }
 
+
+
+
+
+
   /**
    * open component pages except for when component property is logout
    * then logout user from app and route to login page

@@ -61,3 +61,4 @@ import './zone-flags.ts';
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+(window as any).global = window;

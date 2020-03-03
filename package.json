@@ -189,6 +189,7 @@
         "ANDROID_CRASHLYTICS_NDK_VERSION": "2.1.1"
       },
       "call-number": {},
+      "cordova-plugin-android-enumeratedevices": {},
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.10.0"
       },

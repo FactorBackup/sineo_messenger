@@ -29,16 +29,51 @@
       <div [id]="last ? 'last-item' : 'item' + i" *ngFor="let item of message.messages; let i = index; let last = last"
         (press)="onMessageHold(item)">
       
+
+
+
+
+
+
+
+
+
         <!-- message image 보내는 사람 -->
         <span style="float: left;">
-          <div class="title-img" *ngIf="item.uid !== currentUser.uid;" [image-loader]="getSender(message)?.photoURL">
+          <div 
+            class="title-img" 
+            *ngIf="item.uid !== currentUser.uid;" 
+            [image-loader]="getSender(message)?.photoURL"
+            (click)="goto(routes.people, 
+                    { queryParams: { id: getSender(message).uid } })"
+          >
           </div>
         </span>
         <!-- message image 받는 사람 -->
         <span style="float: right;">
-          <div class="title-img" *ngIf="item.uid === currentUser.uid;" [image-loader]="getRecipient(message)?.photoURL">
+          <div 
+            class="title-img" 
+            *ngIf="item.uid === currentUser.uid;" 
+            [image-loader]="getRecipient(message)?.photoURL"
+            (click)="goto(routes.people, 
+                    { queryParams: { id: getRecipient(message).uid } })"
+            >
+            <!-- (click)="goto(routes.people, 
+                    { queryParams: { id: getRecipient(message).uid } })" -->
           </div>
+
         </span>
+
+
+
+
+
+
+
+
+
+
+
 
         <div [ngClass]="item.uid === currentUser.uid ? 'from-me' : 'from-them'">
 
