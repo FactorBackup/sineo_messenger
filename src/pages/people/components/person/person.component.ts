@@ -58,7 +58,7 @@ export class PersonComponent extends Extender implements OnInit {
 		const sessionToken = this.random();
 		let videocall = false;
 		this.callService.startCall(this.user, sessionToken, videocall);
-		this.router.navigate(['/voice-room/' + sessionToken + '/voice']);
+		this.router.navigateByUrl('/voice-room/' + sessionToken + '/voice');
 		this.closeModal();
 	}
 
@@ -67,7 +67,7 @@ export class PersonComponent extends Extender implements OnInit {
 		const sessionToken = this.random();
 		let videocall = true;
 		this.callService.startCall(this.user, sessionToken, videocall);
-		this.router.navigate(['/video-room/' + sessionToken + '/video']);
+		this.router.navigateByUrl('/video-room/' + sessionToken + '/video');
 		this.closeModal();
 	}
 

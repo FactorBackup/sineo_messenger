@@ -19,11 +19,12 @@ const routes: Routes = [
   },
 	{
 		path: 'video-room/:roomName/video',
-		loadChildren: './video-room/video-room.module#VideoRoomPageModule'
+    loadChildren: './video-room/video-room.module#VideoRoomPageModule'
+//    loadChildren: () => import('./video-room/video-room.module').then((m) => m.VideoRoomPageModule)
 	},
 	{
 		path: 'voice-room/:roomName/voice',
-		loadChildren: './voice-room/video-room.module#VideoRoomPageModule'
+		loadChildren: './voice-room/video-room.module#VoiceRoomPageModule'
 	},
   {
     canActivate: [WelcomeGuard],

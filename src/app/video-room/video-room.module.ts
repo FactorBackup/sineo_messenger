@@ -11,28 +11,23 @@ import { OpenViduVideoComponent } from '../shared/components/stream/ov-video.com
 import { ChatComponent } from '../shared/components/chat/chat.component';
 import { SettingUpModalComponent } from '../shared/components/setting-up-modal/setting-up-modal.component';
 
+
 const routes: Routes = [
-	{
-		path: '',
-		component: VideoRoomPage
-	}
+  {
+    path: '',
+    component: VideoRoomPage
+  }
 ];
 
 @NgModule({
-	imports: [
-		CommonModule,
-		FormsModule,
-		IonicModule,
-		RouterModule.forChild(routes)
-	],
-	declarations: [
-		VideoRoomPage,
-		StreamComponent,
-		ChatComponent,
-		SettingUpModalComponent,
-		OpenViduVideoComponent
-	],
-	exports: [],
-	entryComponents: [ChatComponent, SettingUpModalComponent]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes),
+  ],
+  declarations: [VideoRoomPage, StreamComponent, ChatComponent, SettingUpModalComponent, OpenViduVideoComponent],
+  exports: [],
+  entryComponents: [ChatComponent, SettingUpModalComponent]
 })
 export class VideoRoomPageModule {}

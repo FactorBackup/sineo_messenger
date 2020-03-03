@@ -151,7 +151,7 @@ declare var cordova;
 		])
 	]
 })
-export class VideoRoomPage implements OnInit, OnDestroy {
+export class VoiceRoomPage implements OnInit, OnDestroy {
 	// Constants
 	ANDROID_PERMISSIONS = [
 		'android.permission.CAMERA',
