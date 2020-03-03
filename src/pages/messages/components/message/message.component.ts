@@ -30,6 +30,7 @@ import { Button } from 'protractor';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent extends Extender implements OnInit, AfterContentChecked {
+  public sendAt: number = Date.now();
   public message: IMessage;
   public currentUser: IUser;
   public chat: IChat[] = [];
@@ -140,6 +141,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
 
   /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */
   public send(text: any, images = null) {
+    
     const data: IChat = {
       images,
       value: text,

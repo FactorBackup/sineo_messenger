@@ -28,9 +28,7 @@
     <ng-container *ngIf="message && message.messages && message.messages.length">
       <div [id]="last ? 'last-item' : 'item' + i" *ngFor="let item of message.messages; let i = index; let last = last"
         (press)="onMessageHold(item)">
-
-
-
+      
         <!-- message image 보내는 사람 -->
         <span style="float: left;">
           <div class="title-img" *ngIf="item.uid !== currentUser.uid;" [image-loader]="getSender(message)?.photoURL">
@@ -50,24 +48,30 @@
             (click)="preview(item.images[0])"
             *ngIf="item.images && item.images.length === 1"
             [image-loader]="item.images[0]"
-          ></div> -->
-
-          <!-- message image group -->
-          <div class="image-group" *ngIf="item.images && item.images.length > 1">
-            <div class="image-group-image" (click)="preview(image)" *ngFor="let image of item.images"
+            ></div> -->
+            
+            <!-- message image group -->
+            <div class="image-group" *ngIf="item.images && item.images.length > 1">
+              <div class="image-group-image" (click)="preview(image)" *ngFor="let image of item.images"
               [image-loader]="image"></div>
-          </div>
-
-          <!-- message content -->
-          <div *ngIf="item.value" class="text"
+            </div>
+            
+            <!-- message content -->
+            <div *ngIf="item.value" class="text"
             [innerHTML]="item.value.length > 100 && !item.readMore ? (item.value | slice: 0:100) : (item.value | markdown)">
             <!-- read more anchor link -->
+            
             <small>
               <a *ngIf="item.value && item.value.length > 100" (click)="item.readMore = !item.readMore">
                 {{ 'message-component.read-more' | translate }}
               </a>
             </small>
           </div>
+          <!-- 시간표시 채팅창 안에 나오지만 말이 중간에 있으면 이것도 중간에 있다... -->
+          <div class="date" style="width: 110px; height: 20px; text-align: left; margin-right: 3px;">
+            <span>{{ item.sendAt | date:'HH:mm:ss MM/dd/yyyy' }}</span>
+          </div>
+          
         </div>
 
         <div class="clear"></div>
