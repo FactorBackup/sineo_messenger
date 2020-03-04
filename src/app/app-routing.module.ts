@@ -65,8 +65,7 @@ const routes: Routes = [
     path: 'setting',
     loadChildren: () => import('../pages/setting/setting.module').then((m) => m.SettingModule)
   },
-  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' },
-  { path: 'invite-group', loadChildren: './invite-group/invite-group.module#InviteGroupPageModule' }
+  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' }
 
 ];
 
