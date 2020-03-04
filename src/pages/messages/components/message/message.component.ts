@@ -15,8 +15,9 @@ import { MessagesService } from '../../services/messages/messages.service';
 //import translate, { setCORS } from "google-translate-api-browser";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Button } from 'protractor';
+import { GroupmodalPage } from '../../../../app/groupmodal/components/groupmodal.page'
 //import { safeEval } from 'safe-eval';
-
+import { ModalController } from '@ionic/angular'
 /**
  * send messages between users. as a user, you can deactivate autoreply in setting page.
  * or remove autoreply method and all calls to it.
@@ -56,7 +57,8 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
     private commonService: CommonService,
     private firestoreService: FirestoreService,
     private messageService: MessagesService,
-    private settingService: SettingService
+    private settingService: SettingService,
+    public modalController: ModalController
   ) {
     super(injector);
   }
@@ -137,6 +139,14 @@ setCORS("http://cors-anywhere.herokuapp.com/");
       });
       await actionSheet.present();
     }
+  }
+
+  public async group (){
+    const modal = await this.modalController.create({
+      component: GroupmodalPage,
+      animated:true,
+    });
+    return await modal.present();
   }
 
   /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */

@@ -23,7 +23,7 @@ import { VideoRoomPageModule } from './video-room/video-room.module';
 import { VoiceRoomPageModule } from './voice-room/video-room.module';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-
+import { GroupmodalPageModule } from './groupmodal/groupmodal.module'
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -61,7 +61,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
     AngularFirestoreModule,
     AngularFireStorageModule,
     VideoRoomPageModule,
-    VoiceRoomPageModule
+    VoiceRoomPageModule,
+    GroupmodalPageModule
 
   ],
   providers: [
