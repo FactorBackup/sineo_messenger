@@ -7,7 +7,8 @@ import { Extender } from 'src/shared/helpers/extender';
 import { IChat, IMessage } from '../../models/message';
 import { MessagesService } from '../../services/messages/messages.service';
 import { MessageComponent } from '../message/message.component';
-
+import { GroupmodalPage } from '../../../../app/groupmodal/components/groupmodal.page'
+import { ModalController } from '@ionic/angular'
 /*
  * view users messages, manage messages.
  */
@@ -42,7 +43,7 @@ export class MessagesComponent extends Extender implements OnInit {
     }
   ];
 
-  constructor(protected injector: Injector, private authService: AuthService, private messageService: MessagesService) {
+  constructor(protected injector: Injector, private authService: AuthService, private messageService: MessagesService, public modalController: ModalController) {
     super(injector);
   }
 
@@ -61,6 +62,14 @@ export class MessagesComponent extends Extender implements OnInit {
       })
     );
     this.view$.next(false);
+  }
+
+  public async group (){
+    const modal = await this.modalController.create({
+      component: GroupmodalPage,
+      animated:true,
+    });
+    return await modal.present();
   }
 
   /** on view enter, if route contains an id, open chat belonging to that id in a modal straight away */

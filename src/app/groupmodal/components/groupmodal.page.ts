@@ -8,7 +8,8 @@ import { CommonService } from 'src/shared/services/common/common.service';
 import { isArray } from 'util';
 import { GroupmodalService } from '../services/groupmodal/groupmodal.service';
 import { PersonComponent } from 'src/pages/people/components/person/person.component';
-
+import { NavController } from '@ionic/angular'
+import { MessageComponent } from 'src/pages/messages/components/message/message.component';
 @Component({
   selector: 'app-groupmodal',
   templateUrl: './groupmodal.page.html',
@@ -47,7 +48,8 @@ export class GroupmodalPage extends Extender implements OnInit {
     private authService: AuthService,
     private messageService: MessagesService,
     private peopleService: GroupmodalService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    public navCtrl: NavController
     ) {
       super(injector);
     this.alpha = this.peopleService.alpha;
@@ -72,6 +74,10 @@ export class GroupmodalPage extends Extender implements OnInit {
         }
       )
     );
+  }
+  public async gochat(message: string) {
+    const modal = await this.openModal(MessageComponent, message);
+    modal.present();
   }
 /** if you navigate to this page with query params, open person modal and use id in query param to find user details */
 public openProfileFromUrl() {
@@ -106,7 +112,7 @@ public showList(index: number) {
   }
 }
 /** check if user is a friend and follow or unfollow depending on if they are already your friend or not */
-public async manage(friend: IUser) {
+/*public async manage(friend: IUser) {
   if (isArray(this.friends) && this.friends.includes(friend.uid)) {
     await this.peopleService.unfollow(friend.uid);
   } else {
@@ -117,7 +123,7 @@ public async manage(friend: IUser) {
 
 public isFriend(fid: string) {
   return isArray(this.friends) && this.friends.includes(fid);
-}
+}*/
 /** scroll user to user group category */
 public scrollTo(item: string): void {
   const element = document.getElementById(item);
