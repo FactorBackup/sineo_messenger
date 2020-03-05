@@ -1,10 +1,11 @@
+
 <ion-toolbar>
-  
+
 </ion-toolbar>
 
 <ion-content scrollX="false" scrollY="false">
-  
-<!-- <img src="../../../../assets/images/new/Background1.jpg" id="bg" alt=""> -->
+
+  <!-- <img src="../../../../assets/images/new/Background1.jpg" id="bg" alt=""> -->
 
   <div class="content-wrapper">
     <div class="header no-border has-toolbar">
@@ -15,5 +16,29 @@
         <ion-button fill="clear" size="small" color="medium" (click)="openSearch = !openSearch">
           <ion-icon mode="md" name="search"></ion-icon>
         </ion-button>
-        </div>
-    </div>
+      </div>
+    </div><!--toolbar-->
+    
+
+    <div class="wrapper" *ngIf="groupedPeople.length > 0">
+      <div class="content-scroll" #content>
+        <div class="group" *ngFor="let group of groupedPeople">
+          <div class="contact" *ngFor="let contact of group.people; let i = index">
+            <!-- <div class="image"  [image-loader]="contact.photoURL"></div>                   -->
+            
+            <div class="image">
+              <img src="{{ contact.photoURL }}">             
+            </div>
+            
+            <div class="name">{{ contact.displayName }}</div>
+            
+
+              <!--</div>contact-->                            
+            <!--</div>group-->            
+          </div><!--contact-->          
+        </div><!--contact:people contact-->             
+      </div><!--group : groupedPeople-->
+    </div><!--wrapper-->
+    <!-- <app-no-data *ngIf="groupedPeople.length === 0"> </app-no-data> -->
+  </div> <!--content-wrapper-->
+</ion-content>
