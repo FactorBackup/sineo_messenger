@@ -112,7 +112,7 @@ public showList(index: number) {
   }
 }
 /** check if user is a friend and follow or unfollow depending on if they are already your friend or not */
-/*public async manage(friend: IUser) {
+public async manage(friend: IUser) {
   if (isArray(this.friends) && this.friends.includes(friend.uid)) {
     await this.peopleService.unfollow(friend.uid);
   } else {
@@ -123,7 +123,7 @@ public showList(index: number) {
 
 public isFriend(fid: string) {
   return isArray(this.friends) && this.friends.includes(fid);
-}*/
+}
 /** scroll user to user group category */
 public scrollTo(item: string): void {
   const element = document.getElementById(item);

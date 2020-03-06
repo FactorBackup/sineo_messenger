@@ -69,7 +69,7 @@
 </ion-content>
 
 
-<ion-footer>
+<ion-footer *ngIf="!getSelection">
   
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="schedule" (click)="goto(routes.dashboard)">
@@ -101,7 +101,7 @@
 </ion-footer>
 
 <!-- footer with buttons when you select more than one item -->
-<!-- <ion-footer *ngIf="getSelection">
+<ion-footer *ngIf="getSelection">
   <div class="buttons">
     <ion-button size="small" (click)="markAsRead()">Mark as Read</ion-button>
     <ion-button size="small" (click)="archieve()" color="secondary">Archieve</ion-button>
@@ -110,4 +110,4 @@
       <ion-icon src="assets/icons/x.svg"></ion-icon>
     </ion-button>
   </div>
-</ion-footer> -->
+</ion-footer>
