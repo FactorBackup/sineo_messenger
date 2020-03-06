@@ -3,7 +3,9 @@
   padding-left: 5px;
   padding-right: 10px;
 }
-
+ion-content {
+	--ion-background-color: transparent;
+} 
 
 #video-room-content{
   overflow-y: none;

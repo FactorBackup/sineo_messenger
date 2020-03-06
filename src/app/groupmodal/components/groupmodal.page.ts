@@ -6,6 +6,7 @@ import { Extender } from 'src/shared/helpers/extender';
 import { ITabView } from 'src/shared/helpers/models';
 import { CommonService } from 'src/shared/services/common/common.service';
 import { isArray } from 'util';
+import { IChat, IMessage } from '../models/groupmodal';
 import { GroupmodalService } from '../services/groupmodal/groupmodal.service';
 import { PersonComponent } from 'src/pages/people/components/person/person.component';
 import { NavController } from '@ionic/angular'
@@ -17,7 +18,10 @@ import { MessageComponent } from 'src/pages/messages/components/message/message.
 })
 export class GroupmodalPage extends Extender implements OnInit {
   [x: string]: any;
+  public allMessages: IMessage[] = [];
+  public messages: IMessage[] = [];
   public getSelection: boolean = false;
+
   /** get people using the app */
   public list: IUser[];
 
@@ -36,7 +40,7 @@ export class GroupmodalPage extends Extender implements OnInit {
   /** toggles search bar in template */
   public openSearch: boolean = false;
 
-  public selectedIndex: number = 0;
+  public Index: number = 0;
   public friends: any;
   
   /** references content area of content page */
@@ -76,6 +80,7 @@ export class GroupmodalPage extends Extender implements OnInit {
     );
   }
   public async gochat(message: string) {
+    this.getuid ()
     const modal = await this.openModal(MessageComponent, message);
     modal.present();
   }
@@ -123,6 +128,12 @@ public async manage(friend: IUser) {
 
 public isFriend(fid: string) {
   return isArray(this.friends) && this.friends.includes(fid);
+}
+public getuid () {
+  const checked = this.messages.filter((msg) => msg.selected === true);
+    checked.forEach((item) => {
+      const groupuid = item.uid
+    });
 }
 /** scroll user to user group category */
 public scrollTo(item: string): void {
