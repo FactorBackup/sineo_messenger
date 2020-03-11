@@ -31,7 +31,7 @@ import { GroupInfoPageModule } from '../pages/group-info/group-info.module';
 import { GroupsChatPageModule } from '../pages/groups-chat/groups-chat.module';
 import { AddmembersPageModule } from '../pages/addmembers/addmembers.module';
 import { EnlargeImagePageModule } from '../pages/enlarge-image/enlarge-image.module';
-
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -75,7 +75,8 @@ import { EnlargeImagePageModule } from '../pages/enlarge-image/enlarge-image.mod
     GroupInfoPageModule,
     AddmembersPageModule,
     EnlargeImagePageModule,
-    GroupsChatPageModule
+    GroupsChatPageModule,
+    AngularFireDatabaseModule
 
   ],
   providers: [

@@ -31,4 +31,10 @@ export class DashboardComponent extends Extender {
       return view;
     });
   }
+  public gotogroups(){
+
+    this.router.navigateByUrl('/groups');
+  }
+
+
 }
