@@ -1,0 +1,37 @@
+<!-- /*
+* Social chat in Ionic 4 chat application  (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/ -->
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Groups</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <div *ngFor="let group of groups" (click)="groupChat(group.key)" >
+      <ion-col size="6">
+        <div [ngClass]=hasUnreadMessages(group) class="group">
+          <img src="{{group.img || img}}">
+          <ion-badge color="danger" mode="ios" *ngIf="group.unreadMessagesCount > 0">{{group.unreadMessagesCount}}</ion-badge>
+          <p>{{group.name}}<br />
+            <span>{{group.dateCreated | timeAgo}}</span>
+          </p>
+        </div>
+      </ion-col>
+    </div>
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container>
+      <ion-fab-button (click)="newGroups()">
+        <ion-icon name="add" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+  </ion-fab>
+</ion-content>

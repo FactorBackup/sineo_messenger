@@ -1,0 +1,76 @@
+<!-- /*
+* Social chat in Ionic 4 chat application (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/ -->
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button class="backButton" (click)="close()" color="light">
+        <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Group Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="group">
+    <div class="profile">
+      <img src="{{group.img}}" (click)="enlargeImage(group.img)">
+    </div>
+    <h4>
+      <span>{{group.name}}</span>
+    </h4>
+    <p class="time">Started {{group.dateCreated | timeAgo}}</p>
+    <p class="description">{{group.description}}</p>
+    <div class="dividline"></div>
+    <!-- member -->
+    <div class="thumnails" *ngIf="groupMembers">
+      <div class="list-thumbnail">
+        <div class="img-thumb" *ngFor="let member of groupMembers" (click)="assignAdmin(member)">
+          <ion-avatar>
+            <img [src]="member.img" class="isAdmin" *ngIf="isAdminOrNotAdmin(member)" />
+            <img [src]="member.img" class="isNotAdmin" *ngIf="!isAdminOrNotAdmin(member)" />
+          </ion-avatar>
+        </div>
+      </div>
+    </div>
+    <!-- Groups menu -->
+    <ion-list>
+      <ion-item lines="none" (click)="setName()">
+        <ion-icon name="chatbubbles" slot="end"></ion-icon>
+        <ion-label>Set Group name</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" (click)="setPhoto()">
+        <ion-icon name="camera" slot="end"></ion-icon>
+        <ion-label>Set Group Photo</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" (click)="setDescription()">
+        <ion-icon name="clipboard" slot="end"></ion-icon>
+        <ion-label>Set Group Description</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" (click)="addMembers()" *ngIf="isAdmin">
+        <ion-icon name="contacts" slot="end"></ion-icon>
+        <ion-label>Add More Members</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" (click)="leaveGroup()" *ngIf="groupMembers && groupMembers.length > 1">
+        <ion-icon name="log-out" slot="end"></ion-icon>
+        <ion-label>Leave Group</ion-label>
+      </ion-item>
+
+      <ion-item lines="none" (click)="deleteGroup()" *ngIf="groupMembers && groupMembers.length <= 1">
+        <ion-icon name="trash" slot="end"></ion-icon>
+        <ion-label>Delete Group</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+</ion-content>

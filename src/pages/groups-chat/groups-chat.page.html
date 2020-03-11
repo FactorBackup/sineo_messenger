@@ -1,0 +1,121 @@
+<!-- /*
+* Social chat in Ionic 4 chat application  (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/ -->
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button class="backButton" (click)="close()" color="light">
+        <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-thumbnail slot="start">
+      <img class="header" src="{{image}}" (click)="groupInfo()">
+    </ion-thumbnail>
+    <ion-title (click)="groupInfo()">{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #IonContent padding fullscreen="true" class="contentBg" id="chat-parent" overflow-scroll="true">
+
+  <!-- Messages -->
+  <ion-list>
+    <div>
+      <div id="chat-container">
+        <span class="line-style"></span>
+        <hr>
+        <div class=" message-wrap">
+          <div *ngFor="let message of messagesToShow; let i = index; let first = first; let last = last"
+            class="message">
+            <ion-col col-12 class="system" *ngIf="message.type == 'system'">
+              <p>
+                <ion-icon icon="{{message.icon}}"></ion-icon>
+                {{message.message}} <br />
+                <span>{{message.date | timeAgo}}</span>
+              </p>
+            </ion-col>
+            <div class="message-left" *ngIf="message.userId != userId">
+              <div *ngIf="message.type == 'text'">
+                <img class="user-img" [src]="message.avatar" (click)="enlargeImage(message.avatar)" (load)="scroll()">
+                <div class="msg-detail">
+                  <div class="msg-content">
+                    <p class="line-name ">{{message.name}}</p>
+                    <p class="line-breaker-left ">{{message.message}}</p>
+                    <p class="line-time-left ">{{message.date | timeAgo }}</p>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="message.type == 'image'">
+                <img class="user-img" [src]="message.avatar" (click)="enlargeImage(message.avatar)" (load)="scroll()">
+                <div class="msg-detail">
+                  <div class="msg-content">
+                    <p class="line-name ">{{message.name}}</p>
+                    <img class="url" src="{{message.url}}" (click)="enlargeImage(message.url)">
+                    <p class="line-time-left ">{{message.date | timeAgo }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="message-right" *ngIf="message.userId === userId">
+              <div *ngIf="message.type == 'text'">
+                <div class="msg-detail">
+                  <div class="msg-info">
+                  </div>
+                  <div class="msg-content" (load)="scroll()">
+                    <p class="line-name ">{{message.name}}</p>
+                    <p class="line-breaker ">{{message.message}}</p>
+                    <p class="line-time ">{{message.date | timeAgo }}</p>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="message.type == 'image'">
+                <div class="msg-detail">
+                  <div class="msg-info">
+                  </div>
+                  <div class="msg-content" (load)="scroll()">
+                    <p class="line-name ">{{message.name}}</p>
+                    <img class="url" src="{{message.url}}" (click)="enlargeImage(message.url)">
+                    <p class="line-time ">{{message.date | timeAgo }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ng-container *ngIf="message;  else running ">
+      <ion-fab-button (click)="sendMessage()" [disabled]="!message">
+        <ion-icon name="send" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-container>
+
+    <ng-template #running>
+      <ion-fab-button>
+        <ion-icon name="mic" expand="icon-only"></ion-icon>
+      </ion-fab-button>
+    </ng-template>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row no-padding align-items-center>
+      <ion-col size="2">
+        <ion-button expand="block" fill="clear" color="primary" class="msg-btn" (click)="sendPhoto()">
+          <ion-icon name="camera" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="10">
+        <textarea autosize maxRows="4" class="message-input" placeholder="Type your message"
+          [(ngModel)]="message"></textarea>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

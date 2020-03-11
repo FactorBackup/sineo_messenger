@@ -25,6 +25,13 @@ import { VoiceRoomPageModule } from './voice-room/video-room.module';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { GroupmodalPageModule } from './groupmodal/groupmodal.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
+import { GroupInfoPageModule } from '../pages/group-info/group-info.module';
+import { GroupsChatPageModule } from '../pages/groups-chat/groups-chat.module';
+import { AddmembersPageModule } from '../pages/addmembers/addmembers.module';
+import { EnlargeImagePageModule } from '../pages/enlarge-image/enlarge-image.module';
+
 /**
  * bootstrap app component and add all the modules required in this app
  * HttpClientModule to allow making http calls
@@ -64,7 +71,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     VideoRoomPageModule,
     VoiceRoomPageModule,
     GroupmodalPageModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    GroupInfoPageModule,
+    AddmembersPageModule,
+    EnlargeImagePageModule,
+    GroupsChatPageModule
 
   ],
   providers: [

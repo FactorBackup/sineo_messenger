@@ -1,0 +1,95 @@
+/*
+* Social chat in Ionic 4 chat application  (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/
+
+
+
+ion-title {
+  font-size: medium;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: center;
+}
+ion-button {
+  text-transform: capitalize;
+}
+ion-button.done {
+  font-size: small;
+}
+
+.profile {
+  position: relative;
+  overflow: hidden;
+  height: 150px;
+  width: auto;
+  img {
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+    width: 150px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 2px solid #969696;
+  }
+}
+
+.form ion-list {
+  padding: 0;
+  margin: 0 0 0.75em;
+
+  ion-item {
+    background: transparent;
+    color: var(--ion-color-primary);
+  }
+}
+img {
+  border: 2px solid #c4c9d2;
+}
+.error-messages {
+  font-size: 0.7em;
+  color: #dd4b39;
+  text-align: center;
+}
+.p {
+  color: #afa1a1;
+  font-family: auto;
+}
+.camera {
+  position: absolute;
+  left: 210px;
+  top: 76%;
+  width: 55px;
+  size: -2px;
+  font-size: 28px;
+}
+.online {
+  position: absolute;
+  left: 48px;
+  top: 58%;
+  width: 10px;
+  background: #92ff92;
+  height: 10px;
+  border-radius: 50%;
+}
+.thumnails {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  .list-thumbnail {
+    height: 100%;
+    white-space: nowrap;
+    .img-thumb {
+      display: inline-block;
+      border-radius: 4px;
+      width: 50px;
+      margin: 0 2px 0 0;
+      line-height: 60px;
+    }
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}

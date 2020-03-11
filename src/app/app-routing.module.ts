@@ -25,7 +25,13 @@ const routes: Routes = [
 	{
 		path: 'voice-room/:roomName/voice',
 		loadChildren: './voice-room/video-room.module#VoiceRoomPageModule'
-	},
+  },
+  { path: 'groups', loadChildren: '../pages/groups/groups.module#GroupsPageModule' },
+  { path: 'enlarge-image', loadChildren: '../pages/enlarge-image/enlarge-image.module#EnlargeImagePageModule' },
+  { path: 'new-groups', loadChildren: '../pages/new-groups/new-groups.module#NewGroupsPageModule' },
+  { path: 'groups-chat', loadChildren: '../pages/groups-chat/groups-chat.module#GroupsChatPageModule' },
+  { path: 'group-info', loadChildren: '../pages/group-info/group-info.module#GroupInfoPageModule' },
+  { path: 'addmembers', loadChildren: '../pages/addmembers/addmembers.module#AddmembersPageModule' },
   {
     canActivate: [WelcomeGuard],
     path: 'welcome',
@@ -65,7 +71,8 @@ const routes: Routes = [
     path: 'setting',
     loadChildren: () => import('../pages/setting/setting.module').then((m) => m.SettingModule)
   },
-  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' },  { path: 'groupmodal', loadChildren: './groupmodal/groupmodal.module#GroupmodalPageModule' }
+  { path: 'translator', loadChildren: './translator/translator.module#TranslatorPageModule' },
+  { path: 'groupmodal', loadChildren: './groupmodal/groupmodal.module#GroupmodalPageModule' }
 
 
 ];

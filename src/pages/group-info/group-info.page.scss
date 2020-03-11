@@ -1,0 +1,71 @@
+/*
+* Social chat in Ionic 4 chat application  (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/
+
+
+.profile {
+  position: relative;
+  overflow: hidden;
+  height: 150px;
+  width: auto;
+  img {
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+    width: 150px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 2px solid #969696;
+  }
+}
+h4,
+p {
+  text-align: center;
+}
+h4 {
+  margin: 0;
+  padding: 0;
+}
+p.time {
+  color: var(--ion-color-primary);
+  margin-bottom: -6px !important;
+  margin-top: 6px !important;
+  font-size: 115%;
+}
+p.description {
+  width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+.members {
+  text-align: center;
+}
+.thumnails {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  .list-thumbnail {
+    height: 100%;
+    white-space: nowrap;
+    .img-thumb {
+      display: inline-block;
+      border-radius: 4px;
+      width: 50px;
+      margin: 0 2px 0 0;
+      line-height: 60px;
+    }
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+img.isAdmin{
+    border: 2px solid green;
+}
+img.isNotAdmin{
+    border: 2px solid #cccccc;
+}

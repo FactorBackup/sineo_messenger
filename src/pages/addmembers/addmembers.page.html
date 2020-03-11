@@ -1,0 +1,60 @@
+<!-- /*
+* FSocial chat in Ionic 4 chat application (https://github.com/habupagas/facebook-clone-ionic4)
+* Copyright  @2020-present. All right reserved.
+* Author By Abubakar Pagas
+*/ -->
+
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button class="backButton" (click)="close()" color="light">
+        <ion-icon slot="start" name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Members</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="backButton" (click)="addSeved()" color="light" [disabled]="toAdd && toAdd.length < 1">
+        Done
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <div class="empty-list" *ngIf="friends && friends.length == 0" class="ion-padding">
+      <h1>
+        <ion-icon name="md-contacts"></ion-icon>
+      </h1>
+      <p>Uh-oh! You have not added any friends right now.</p>
+      <ion-button (click)="searchPeople()"> Search people
+        <ion-icon slot="start" name="search"></ion-icon>
+      </ion-button>
+    </div>
+    <!-- Add/Cancel Add friends to the group. -->
+    <ion-list no-line class="avatar-list">
+      <ion-item *ngFor="let friend of friends">
+        <ion-avatar slot="start">
+          <img src="{{friend.img}}">
+        </ion-avatar>
+        <ion-col>
+          <ion-label class="ion-text-wrap">
+            <ion-text>
+              <h2>{{friend.username}} </h2>
+              <ion-label class="p">{{friend.email}}</ion-label>
+            </ion-text>
+          </ion-label>
+        </ion-col>
+        <ion-button size="small" fill="outline" slot="end" (click)="add(friend);" *ngIf="!isAdded(friend)">
+          add
+        </ion-button>
+        <ion-button size="small" fill="outline" slot="end" (click)="remove(friend);" *ngIf="isAdded(friend)">
+          remove
+        </ion-button>
+
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>
