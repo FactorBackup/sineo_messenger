@@ -470,6 +470,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "SQLitePlugin"
       ]
+    },
+    {
+      "id": "cordova-plugin-android-enumeratedevices.EnumerateDevicesPlugin",
+      "file": "plugins/cordova-plugin-android-enumeratedevices/www/EnumerateDevicesPlugin.js",
+      "pluginId": "cordova-plugin-android-enumeratedevices",
+      "clobbers": [
+        "cordova.plugins.EnumerateDevicesPlugin"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -493,6 +501,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-whitelist": "1.3.3",
     "es6-promise-plugin": "4.2.2",
     "cordova-plugin-x-socialsharing": "5.6.4",
-    "cordova-sqlite-storage": "3.4.1"
+    "cordova-sqlite-storage": "3.4.1",
+    "cordova-plugin-android-enumeratedevices": "0.0.1"
   };
 });

@@ -18,6 +18,7 @@ import { Button } from 'protractor';
 import { GroupmodalPage } from '../../../../app/groupmodal/components/groupmodal.page'
 //import { safeEval } from 'safe-eval';
 import { ModalController } from '@ionic/angular'
+import { CallsService } from '../../../messages/services/calls/calls.service';
 /**
  * send messages between users. as a user, you can deactivate autoreply in setting page.
  * or remove autoreply method and all calls to it.
@@ -58,7 +59,8 @@ export class MessageComponent extends Extender implements OnInit, AfterContentCh
     private firestoreService: FirestoreService,
     private messageService: MessagesService,
     private settingService: SettingService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private callService: CallsService
   ) {
     super(injector);
   }
@@ -148,7 +150,66 @@ setCORS("http://cors-anywhere.herokuapp.com/");
     });
     return await modal.present();
   }
+  public async openMore(contact: IUser): Promise<any> {
+    const actionSheetCtrl = await this.actionSheetCtrl.create({
+      header: this.translate.instant('other.options'),
+      buttons: [
+        
+        
+        {
+          text: this.translate.instant('people-component.call'),
+          handler: () => {
 
+
+            const sessionToken = this.random();
+            let videocall = false;
+            this.callService.startCall(contact, sessionToken, videocall);
+            this.router.navigate(['/voice-room/' + sessionToken + '/voice']);
+            this.closeModal();
+
+//            this.commonService.callUser(contact.mobile || contact.phone, this.callNumber);
+          }
+        },
+        {
+          text: this.translate.instant('people-component.videocall'),
+          handler: () => {
+
+            const sessionToken = this.random();
+            let videocall = true;
+            this.callService.startCall(contact, sessionToken, videocall);
+            this.router.navigate(['/video-room/' + sessionToken + '/video']);
+            this.closeModal();
+
+//            this.commonService.callUser(contact.mobile || contact.phone, this.callNumber);
+          }
+        },
+
+        {
+          text: 'Translator Option',
+          handler: () => {
+            this.translatorOptions();
+          }
+        },
+        {
+          text: this.translate.instant('other.cancel'),
+          role: 'cancel'
+        }
+      ]
+    });
+    await actionSheetCtrl.present();
+  }
+  random(): string {
+		//	let rand = Math.floor(Math.random()*20.0)+1.0;
+		//	return rand;
+		return (
+			Math.random()
+				.toString(36)
+				.substring(2, 15) +
+			Math.random()
+				.toString(36)
+				.substring(2, 15)
+		);
+  }
   /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */
   public send(text: any, images = null) {
     
@@ -661,4 +722,7 @@ setCORS("http://cors-anywhere.herokuapp.com/");
     this.sendLoading = false;
     this.toast(err);
   };
+  goBack(){
+		this.closeModal();
+	}
 }

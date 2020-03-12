@@ -200,5 +200,13 @@
     },
     "is_top_level": false,
     "variables": {}
+  },
+  "cordova-plugin-android-enumeratedevices": {
+    "source": {
+      "type": "registry",
+      "id": "git+https://github.com/OpenVidu/cordova-plugin-android-enumeratedevices.git"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

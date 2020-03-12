@@ -78,6 +78,9 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.factor.messager"
+    },
+    "cordova-plugin-android-enumeratedevices": {
+      "PACKAGE_NAME": "com.factor.messager"
     }
   },
   "dependent_plugins": {

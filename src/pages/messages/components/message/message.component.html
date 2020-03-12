@@ -5,21 +5,22 @@
         <ion-icon src="assets/icons/arrow-left.svg"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
+    <!--<ion-buttons slot="end">
     <ion-button fill="clear" size="small" color="medium" (click)="group()">          
       <ion-icon color="medium" src="../../../../assets/icons/plus.svg"></ion-icon>
     </ion-button>
-  </ion-buttons>
-    <ion-buttons slot="end">
+  </ion-buttons>-->
+    <!--<ion-buttons slot="end">
       <ion-button class="circle" fill="clear" color="medium" (click)="translatorOptions()">
         <ion-icon name="flag"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons>-->
     <ion-buttons slot="end">
-      <ion-button color="medium" (click)="call()">
-        <ion-icon src="assets/icons/phone.svg"></ion-icon>
+      <ion-button color="medium" (click)="openMore()">
+        <ion-icon mode="md" name="more"></ion-icon>
       </ion-button>
     </ion-buttons>
+  
     <ion-title><span>
         <div class="title-img" [image-loader]="getSender(message)?.photoURL"></div>
         {{ getSender(message)?.displayName }}
@@ -42,6 +43,9 @@
             (click)="goto(routes.people, 
                     { queryParams: { id: getSender(message).uid } })"
           >
+          <div class="date" style="font-size: 10px; text-align: center;">
+            <span>{{ item.sendAt | date:'HH:mm' }}</span>
+          </div>
           </div>
         </span>
         <!-- message image 받는 사람 -->
@@ -55,10 +59,12 @@
             >
             <!-- (click)="goto(routes.people, 
                     { queryParams: { id: getRecipient(message).uid } })" -->
+                    <div class="date" style="font-size: 10px; text-align: center;">
+                      <span>{{ item.sendAt | date:'HH:mm' }}</span>
+                    </div>
           </div>
 
         </span>
-
         <div [ngClass]="item.uid === currentUser.uid ? 'from-me' : 'from-them'">
 
           <!-- message image -->
@@ -87,9 +93,9 @@
             </small>
           </div>
           <!-- 시간표시 채팅창 안에 나오지만 말이 중간에 있으면 이것도 중간에 있다... -->
-          <div class="date" style="font-size: 10px; text-align: center;">
+          <!--<div class="date" style="font-size: 10px; text-align: center;">
             <span>{{ item.sendAt | date:'HH:mm' }}</span>
-          </div>
+          </div>-->
           
         </div>
 

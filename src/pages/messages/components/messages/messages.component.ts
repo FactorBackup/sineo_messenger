@@ -9,6 +9,9 @@ import { MessagesService } from '../../services/messages/messages.service';
 import { MessageComponent } from '../message/message.component';
 import { GroupmodalPage } from '../../../../app/groupmodal/components/groupmodal.page'
 import { ModalController } from '@ionic/angular'
+
+import { Platform } from '@ionic/angular';
+import { Toast } from '@ionic-native/toast/ngx';
 /*
  * view users messages, manage messages.
  */
@@ -18,6 +21,7 @@ import { ModalController } from '@ionic/angular'
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent extends Extender implements OnInit {
+  back_clicked = 0;
   public allMessages: IMessage[] = [];
   public messages: IMessage[] = [];
   public currentUser: IUser;
@@ -43,7 +47,13 @@ export class MessagesComponent extends Extender implements OnInit {
     }
   ];
 
-  constructor(protected injector: Injector, private authService: AuthService, private messageService: MessagesService, public modalController: ModalController) {
+  constructor(
+    protected injector: Injector, 
+    public readonly platform: Platform,
+    private nativeToast: Toast,
+    private authService: AuthService, 
+    private messageService: MessagesService, 
+    public modalController: ModalController) {
     super(injector);
   }
 
@@ -54,6 +64,7 @@ export class MessagesComponent extends Extender implements OnInit {
    * emit event for no archieved messages on initialization
    */
   public async ngOnInit() {
+    this.appExitConfig();
     this.currentUser = await this.authService.getUser();
     const queryObservable = this.view$.pipe(switchMap((view) => this.messageService.getMessages(this.currentUser.uid, view)));
     this.subscriptions.push(
@@ -63,7 +74,25 @@ export class MessagesComponent extends Extender implements OnInit {
     );
     this.view$.next(false);
   }
-
+  private appExitConfig() {
+    this.platform.backButton.subscribe(async () => {
+        if (this.back_clicked === 0) {
+            this.back_clicked++;
+  
+            const toast = await this.toastCtrl.create({
+                message: '뒤로가기 버튼을 한번 더 누르시면 앱이 종료됩니다.',
+                duration: 2000
+            });
+            toast.present();
+  
+            setTimeout(() => {
+                this.back_clicked = 0;
+            }, 2000);
+        } else {
+            navigator['app'].exitApp();
+        }
+    });
+  }
   public async group (){
     const modal = await this.modalController.create({
       component: GroupmodalPage,

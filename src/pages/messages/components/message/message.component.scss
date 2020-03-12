@@ -8,6 +8,10 @@
     margin-right: 5px;
     margin-left: 5px;
     border: 1px solid var(--ion-color-light-shade);
+    .date {
+      position: relative;
+      top:30px;
+    }
   }
   .clear {
     clear: both;
@@ -22,6 +26,7 @@
       border-radius: 1em;
       margin: 10px 0;
       overflow: hidden;
+      max-width: 80%;
 
       .image {
         width: 200px;
@@ -78,7 +83,7 @@
     }
 
     .from-them {
-      background: var(--ion-color-gradient);
+      background: var(--ion-color-secondary-tint);
       border-top-left-radius: 0px;
       color: var(--ion-color-light);
       float: left;

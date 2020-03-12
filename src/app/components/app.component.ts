@@ -6,8 +6,8 @@ import { Extender } from 'src/shared/helpers/extender';
 import { FcmService } from 'src/shared/services/fcm/fcm.service';
 import { AppService, IAppPages } from '../services/app/app.service';
 
-import { Platform } from '@ionic/angular';
-import { Toast } from '@ionic-native/toast/ngx';
+//import { Platform } from '@ionic/angular';
+//import { Toast } from '@ionic-native/toast/ngx';
 
 
 /**
@@ -29,12 +29,12 @@ export class AppComponent extends Extender implements OnInit {
   
   
   public count: number = 0;
-  back_clicked = 0;
+  //back_clicked = 0;
 
   constructor(
 
-    public readonly platform: Platform,
-    private nativeToast: Toast,
+    /*public readonly platform: Platform,
+    private nativeToast: Toast,*/
    
     protected injector: Injector,
     private appService: AppService,
@@ -54,8 +54,9 @@ export class AppComponent extends Extender implements OnInit {
    * setup app pages
    * get user preferences to setup lang
    */
+  
   public async ngOnInit() {
-    this.appExitConfig();
+    //this.appExitConfig();
     this.appService.initializeApp();
     const lang = await this.storage.get('language');
     this.appService.langConfig(lang);
@@ -74,11 +75,6 @@ export class AppComponent extends Extender implements OnInit {
     );
   }
 
-
-
-
-
-
   /**
    * open component pages except for when component property is logout
    * then logout user from app and route to login page
@@ -93,14 +89,13 @@ export class AppComponent extends Extender implements OnInit {
   }
 
   /* Listen to incoming messages */
-
   /*
   private listen4Notifications() {
     this.subscriptions.push(this.fcmService.listenToNotifications().subscribe());
   }
-
   */
- private appExitConfig() {
+
+/* private appExitConfig() {
   this.platform.backButton.subscribe(async () => {
       if (this.back_clicked === 0) {
           this.back_clicked++;
@@ -118,11 +113,7 @@ export class AppComponent extends Extender implements OnInit {
           navigator['app'].exitApp();
       }
   });
-}
-
-
-
-
+}*/
 
 	/* Listen to incoming messages */
 	private listen4Notifications() {
@@ -153,11 +144,4 @@ export class AppComponent extends Extender implements OnInit {
 			})
 		);
 	}
-
-
-
-
-
-
-
 }
