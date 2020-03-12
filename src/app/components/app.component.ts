@@ -26,17 +26,16 @@ import { Toast } from '@ionic-native/toast/ngx';
 export class AppComponent extends Extender implements OnInit {
   public pages = [];
   public color: string = '#3232FF';
-
+  
   
   public count: number = 0;
-
+  back_clicked = 0;
 
   constructor(
 
     public readonly platform: Platform,
     private nativeToast: Toast,
-
-
+   
     protected injector: Injector,
     private appService: AppService,
     private authService: AuthService,
@@ -56,6 +55,7 @@ export class AppComponent extends Extender implements OnInit {
    * get user preferences to setup lang
    */
   public async ngOnInit() {
+    this.appExitConfig();
     this.appService.initializeApp();
     const lang = await this.storage.get('language');
     this.appService.langConfig(lang);
@@ -100,31 +100,25 @@ export class AppComponent extends Extender implements OnInit {
   }
 
   */
-  private exitFromApp() {
+ private appExitConfig() {
+  this.platform.backButton.subscribe(async () => {
+      if (this.back_clicked === 0) {
+          this.back_clicked++;
 
-    this.platform.backButton.subscribe(() => {
-
-      this.count++;
-
-      if (this.count === 1) {
-
-        this.nativeToast
-          .show(
-              '뒤로 가기 버튼을 한번 더 누르면 종료됩니다', 
-              '5000', 
-              'bottom')
-          .subscribe((toast) => {
-            console.log(toast);
+          const toast = await this.toastCtrl.create({
+              message: '뒤로가기 버튼을 한번 더 누르시면 앱이 종료됩니다.',
+              duration: 2000
           });
+          toast.present();
 
-      } else if (this.count === 2) {
-        navigator['app'].exitApp();
-          setTimeout(function () {
-            this.count = 0;
-          }, 800);
-        }
-    });
-  }
+          setTimeout(() => {
+              this.back_clicked = 0;
+          }, 2000);
+      } else {
+          navigator['app'].exitApp();
+      }
+  });
+}
 
 
 
