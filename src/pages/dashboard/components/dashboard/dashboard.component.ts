@@ -2,7 +2,7 @@ import { Component, Injector } from '@angular/core';
 import { Extender } from 'src/shared/helpers/extender';
 import { ITabView } from 'src/shared/helpers/models';
 import { DashboardService } from '../../services/dashboard/dashboard.service';
-
+import { Router } from '@angular/router';
 /**
  * get dashboard tabs information
  * set appropriate tab based on if page data param match tab id
@@ -34,6 +34,7 @@ export class DashboardComponent extends Extender {
   public gotogroups(){
 
     this.router.navigateByUrl('/groups');
+    
   }
 
 
