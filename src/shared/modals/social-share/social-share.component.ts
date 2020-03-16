@@ -19,7 +19,8 @@ export class SocialShareComponent extends Extender implements OnInit {
 
   /** get share configs */
   public ngOnInit() {
-    this.share.config.url = `${environment.hosting}/${this.navParam.get('data')}`;
+    //this.share.config.url = `${environment.hosting}/${this.navParam.get('data')}`;
+    this.share.config.url = `http://8098e554.ngrok.io/${this.navParam.get('data')}`;
     this.socialButtons = [
       {
         text: 'Facebook',

@@ -34,9 +34,9 @@ export class GroupsPage implements OnInit {
     private modelCtrl: ModalController,
   ) { }
 
-  public ngOnInit() {
+  public async ngOnInit() {
     // Get user data on database and get list of group.\
-    this.dataServices.keyGroups(firebase.auth().currentUser.uid).valueChanges().subscribe((groupIds) => {
+    await this.dataServices.keyGroups(firebase.auth().currentUser.uid).valueChanges().subscribe((groupIds) => {
       if (groupIds.length > 0) {
         if(this.groups && this.groups.length > groupIds.length) {
           this.groups = [];

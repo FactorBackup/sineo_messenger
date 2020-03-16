@@ -81,13 +81,13 @@ export class MessagesComponent extends Extender implements OnInit {
   
             const toast = await this.toastCtrl.create({
                 message: '뒤로가기 버튼을 한번 더 누르시면 앱이 종료됩니다.',
-                duration: 2000
+                duration: 1000
             });
             toast.present();
   
             setTimeout(() => {
                 this.back_clicked = 0;
-            }, 2000);
+            }, 1000);
         } else {
             navigator['app'].exitApp();
         }

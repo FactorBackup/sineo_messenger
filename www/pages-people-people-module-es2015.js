@@ -278,67 +278,6 @@ module.exports = "<ion-content scrollX=\"false\" scrollY=\"false\">\r\n  <div cl
 
 /***/ }),
 
-/***/ "./src/pages/messages/services/calls/calls.service.ts":
-/*!************************************************************!*\
-  !*** ./src/pages/messages/services/calls/calls.service.ts ***!
-  \************************************************************/
-/*! exports provided: CallsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallsService", function() { return CallsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../auth/services/auth/auth.service */ "./src/pages/auth/services/auth/auth.service.ts");
-/* harmony import */ var _shared_helpers_extender__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../shared/helpers/extender */ "./src/shared/helpers/extender.ts");
-/* harmony import */ var _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../shared/services/firestore/firestore.service */ "./src/shared/services/firestore/firestore.service.ts");
-
-
-
-
-
-let CallsService = class CallsService extends _shared_helpers_extender__WEBPACK_IMPORTED_MODULE_3__["Extender"] {
-    constructor(injector, authService, firestoreService) {
-        super(injector);
-        this.injector = injector;
-        this.authService = authService;
-        this.firestoreService = firestoreService;
-    }
-    startCall(user, sessionToken, videocall) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            return this.createCall(user, sessionToken, videocall);
-        });
-    }
-    createCall(user, sessionToken, videocall) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const { uid } = yield this.authService.getUser();
-            this.firestoreService.add('calls', {
-                participantsId: [user.uid, uid],
-                sessionToken: sessionToken,
-                video: videocall ? "true" : "false"
-            });
-        });
-    }
-};
-CallsService.ctorParameters = () => [
-    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] },
-    { type: _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
-    { type: _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__["FirestoreService"] }
-];
-CallsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"],
-        _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
-        _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__["FirestoreService"]])
-], CallsService);
-
-
-
-/***/ }),
-
 /***/ "./src/pages/people/components/people/people.component.scss":
 /*!******************************************************************!*\
   !*** ./src/pages/people/components/people/people.component.scss ***!

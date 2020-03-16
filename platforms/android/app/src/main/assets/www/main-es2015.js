@@ -922,7 +922,7 @@ module.exports = "<!-- /*\n* Social chat in Ionic 4 chat application  (https://g
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button size=\"small\" color=\"dark\" (click)=\"closeModal(null, routes.messages)\">\r\n        <ion-icon src=\"assets/icons/arrow-left.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\">\r\n    <ion-button fill=\"clear\" size=\"small\" color=\"medium\" (click)=\"group()\">          \r\n      <ion-icon color=\"medium\" src=\"../../../../assets/icons/plus.svg\"></ion-icon>\r\n    </ion-button>\r\n  </ion-buttons>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"medium\" (click)=\"translatorOptions()\">\r\n        <ion-icon name=\"flag\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button color=\"medium\" (click)=\"call()\">\r\n        <ion-icon src=\"assets/icons/phone.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title><span>\r\n        <div class=\"title-img\" [image-loader]=\"getSender(message)?.photoURL\"></div>\r\n        {{ getSender(message)?.displayName }}\r\n      </span></ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"content-wrapper\" *ngIf=\"currentUser\">\r\n    <ng-container *ngIf=\"message && message.messages && message.messages.length\">\r\n      <div [id]=\"last ? 'last-item' : 'item' + i\" *ngFor=\"let item of message.messages; let i = index; let last = last\"\r\n        (press)=\"onMessageHold(item)\">\r\n      \r\n        <!-- message image 보내는 사람 -->\r\n        <span style=\"float: left;\">\r\n          <div \r\n            class=\"title-img\" \r\n            *ngIf=\"item.uid !== currentUser.uid;\" \r\n            [image-loader]=\"getSender(message)?.photoURL\"\r\n            (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getSender(message).uid } })\"\r\n          >\r\n          </div>\r\n        </span>\r\n        <!-- message image 받는 사람 -->\r\n        <span style=\"float: right;\">\r\n          <div \r\n            class=\"title-img\" \r\n            *ngIf=\"item.uid === currentUser.uid;\" \r\n            [image-loader]=\"getRecipient(message)?.photoURL\"\r\n            (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getRecipient(message).uid } })\"\r\n            >\r\n            <!-- (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getRecipient(message).uid } })\" -->\r\n          </div>\r\n\r\n        </span>\r\n\r\n        <div [ngClass]=\"item.uid === currentUser.uid ? 'from-me' : 'from-them'\">\r\n\r\n          <!-- message image -->\r\n          <!-- <div\r\n            class=\"image\"\r\n            (click)=\"preview(item.images[0])\"\r\n            *ngIf=\"item.images && item.images.length === 1\"\r\n            [image-loader]=\"item.images[0]\"\r\n            ></div> -->\r\n            \r\n            <!-- message image group -->\r\n            <div class=\"image-group\" *ngIf=\"item.images && item.images.length > 1\">\r\n              <div class=\"image-group-image\" (click)=\"preview(image)\" *ngFor=\"let image of item.images\"\r\n              [image-loader]=\"image\"></div>\r\n            </div>\r\n            \r\n            <!-- message content -->\r\n            <div *ngIf=\"item.value\" class=\"text\"\r\n            [innerHTML]=\"item.value.length > 100 && !item.readMore ? (item.value | slice: 0:100) : (item.value | markdown)\">\r\n            <!-- read more anchor link -->\r\n            \r\n            <small>\r\n              <a *ngIf=\"item.value && item.value.length > 100\" (click)=\"item.readMore = !item.readMore\">\r\n                {{ 'message-component.read-more' | translate }}\r\n              </a>\r\n            </small>\r\n          </div>\r\n          <!-- 시간표시 채팅창 안에 나오지만 말이 중간에 있으면 이것도 중간에 있다... -->\r\n          <div class=\"date\" style=\"font-size: 10px; text-align: center;\">\r\n            <span>{{ item.sendAt | date:'HH:mm' }}</span>\r\n          </div>\r\n          \r\n        </div>\r\n\r\n        <div class=\"clear\"></div>\r\n      </div>\r\n    </ng-container>\r\n\r\n    <app-no-data [config]=\"noDataconfig\" *ngIf=\"message && message.messages && message.messages.length === 0\">\r\n    </app-no-data>\r\n  </div>\r\n</ion-content>\r\n\r\n<ion-footer>\r\n  <ion-toolbar class=\"custom-form\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"primary\" (click)=\"sendPhoto()\">\r\n        <ion-icon src=\"assets/icons/camera.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n\r\n    <textarea autosize maxrow=\"4\" useImportant=\"true\" name=\"message\"\r\n      placeholder=\"{{ 'message-component.placeholder' | translate }}\" [(ngModel)]=\"textMsg\"></textarea>\r\n\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"primary\" (click)=\"send(textMsg)\">\r\n        <ion-icon src=\"assets/icons/send.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-footer>\r\n\r\n<!-- <app-spinner *ngIf=\"loading\"></app-spinner> -->\r\n\r\n<!-- required for browser file upload -->\r\n<input hidden #fileInputButton type=\"file\" (change)=\"detectFiles($event)\" multiple />\r\n\r\n<!-- call user with hidden a tag -->\r\n<a hidden #callNumber href=\"tel:+{{ getSender(message)?.mobile || getSender(message)?.phone }}\"></a>"
+module.exports = "<ion-header>\r\n  <ion-toolbar mode=\"md\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button size=\"small\" color=\"dark\" (click)=\"closeModal(null, routes.messages)\">\r\n        <ion-icon src=\"assets/icons/arrow-left.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <!--<ion-buttons slot=\"end\">\r\n    <ion-button fill=\"clear\" size=\"small\" color=\"medium\" (click)=\"group()\">          \r\n      <ion-icon color=\"medium\" src=\"../../../../assets/icons/plus.svg\"></ion-icon>\r\n    </ion-button>\r\n  </ion-buttons>-->\r\n    <!--<ion-buttons slot=\"end\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"medium\" (click)=\"translatorOptions()\">\r\n        <ion-icon name=\"flag\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>-->\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button color=\"medium\" (click)=\"openMore()\">\r\n        <ion-icon mode=\"md\" name=\"more\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  \r\n    <ion-title><span>\r\n        <div class=\"title-img\" [image-loader]=\"getSender(message)?.photoURL\"></div>\r\n        {{ getSender(message)?.displayName }}\r\n      </span></ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"content-wrapper\" *ngIf=\"currentUser\">\r\n    <ng-container *ngIf=\"message && message.messages && message.messages.length\">\r\n      <div [id]=\"last ? 'last-item' : 'item' + i\" *ngFor=\"let item of message.messages; let i = index; let last = last\"\r\n        (press)=\"onMessageHold(item)\">\r\n      \r\n        <!-- message image 보내는 사람 -->\r\n        <span style=\"float: left;\">\r\n          <div \r\n            class=\"title-img\" \r\n            *ngIf=\"item.uid !== currentUser.uid;\" \r\n            [image-loader]=\"getSender(message)?.photoURL\"\r\n            (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getSender(message).uid } })\"\r\n          >\r\n          <div class=\"date\" style=\"font-size: 10px; text-align: center;\">\r\n            <span>{{ item.sendAt | date:'HH:mm' }}</span>\r\n          </div>\r\n          </div>\r\n        </span>\r\n        <!-- message image 받는 사람 -->\r\n        <span style=\"float: right;\">\r\n          <div \r\n            class=\"title-img\" \r\n            *ngIf=\"item.uid === currentUser.uid;\" \r\n            [image-loader]=\"getRecipient(message)?.photoURL\"\r\n            (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getRecipient(message).uid } })\"\r\n            >\r\n            <!-- (click)=\"goto(routes.people, \r\n                    { queryParams: { id: getRecipient(message).uid } })\" -->\r\n                    <div class=\"date\" style=\"font-size: 10px; text-align: center;\">\r\n                      <span>{{ item.sendAt | date:'HH:mm' }}</span>\r\n                    </div>\r\n          </div>\r\n\r\n        </span>\r\n        <div [ngClass]=\"item.uid === currentUser.uid ? 'from-me' : 'from-them'\">\r\n\r\n          <!-- message image -->\r\n          <!-- <div\r\n            class=\"image\"\r\n            (click)=\"preview(item.images[0])\"\r\n            *ngIf=\"item.images && item.images.length === 1\"\r\n            [image-loader]=\"item.images[0]\"\r\n            ></div> -->\r\n            \r\n            <!-- message image group -->\r\n            <div class=\"image-group\" *ngIf=\"item.images && item.images.length > 1\">\r\n              <div class=\"image-group-image\" (click)=\"preview(image)\" *ngFor=\"let image of item.images\"\r\n              [image-loader]=\"image\"></div>\r\n            </div>\r\n            \r\n            <!-- message content -->\r\n            <div *ngIf=\"item.value\" class=\"text\"\r\n            [innerHTML]=\"item.value.length > 100 && !item.readMore ? (item.value | slice: 0:100) : (item.value | markdown)\">\r\n            <!-- read more anchor link -->\r\n            \r\n            <small>\r\n              <a *ngIf=\"item.value && item.value.length > 100\" (click)=\"item.readMore = !item.readMore\">\r\n                {{ 'message-component.read-more' | translate }}\r\n              </a>\r\n            </small>\r\n          </div>\r\n          <!-- 시간표시 채팅창 안에 나오지만 말이 중간에 있으면 이것도 중간에 있다... -->\r\n          <!--<div class=\"date\" style=\"font-size: 10px; text-align: center;\">\r\n            <span>{{ item.sendAt | date:'HH:mm' }}</span>\r\n          </div>-->\r\n          \r\n        </div>\r\n\r\n        <div class=\"clear\"></div>\r\n      </div>\r\n    </ng-container>\r\n\r\n    <app-no-data [config]=\"noDataconfig\" *ngIf=\"message && message.messages && message.messages.length === 0\">\r\n    </app-no-data>\r\n  </div>\r\n</ion-content>\r\n\r\n<ion-footer>\r\n  <ion-toolbar class=\"custom-form\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"primary\" (click)=\"sendPhoto()\">\r\n        <ion-icon src=\"assets/icons/camera.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n\r\n    <textarea autosize maxrow=\"4\" useImportant=\"true\" name=\"message\"\r\n      placeholder=\"{{ 'message-component.placeholder' | translate }}\" [(ngModel)]=\"textMsg\"></textarea>\r\n\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button class=\"circle\" fill=\"clear\" color=\"primary\" (click)=\"send(textMsg)\">\r\n        <ion-icon src=\"assets/icons/send.svg\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-footer>\r\n\r\n<!-- <app-spinner *ngIf=\"loading\"></app-spinner> -->\r\n\r\n<!-- required for browser file upload -->\r\n<input hidden #fileInputButton type=\"file\" (change)=\"detectFiles($event)\" multiple />\r\n\r\n<!-- call user with hidden a tag -->\r\n<a hidden #callNumber href=\"tel:+{{ getSender(message)?.mobile || getSender(message)?.phone }}\"></a>"
 
 /***/ }),
 
@@ -1688,7 +1688,6 @@ let AppComponent = class AppComponent extends src_shared_helpers_extender__WEBPA
     private listen4Notifications() {
       this.subscriptions.push(this.fcmService.listenToNotifications().subscribe());
     }
-  
     */
     /* private appExitConfig() {
       this.platform.backButton.subscribe(async () => {
@@ -7359,7 +7358,7 @@ GroupsChatPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host .title-img {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background-size: contain !important;\n  background-color: var(--ion-color-light-shade);\n  margin-right: 5px;\n  margin-left: 5px;\n  border: 1px solid var(--ion-color-light-shade); }\n\n:host .clear {\n  clear: both; }\n\n:host .content-wrapper {\n  height: 100%; }\n\n:host .content-wrapper .from-me,\n  :host .content-wrapper .from-them {\n    position: relative;\n    border-radius: 1em;\n    margin: 10px 0;\n    overflow: hidden; }\n\n:host .content-wrapper .from-me .image,\n    :host .content-wrapper .from-them .image {\n      width: 200px;\n      height: 200px; }\n\n:host .content-wrapper .from-me .image-group,\n    :host .content-wrapper .from-them .image-group {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      grid-auto-rows: auto;\n      grid-gap: 0.5rem;\n      padding: 10px 10px 5px;\n      border-top-left-radius: 1em; }\n\n:host .content-wrapper .from-me .image-group .image-group-image,\n      :host .content-wrapper .from-them .image-group .image-group-image {\n        height: 100px;\n        width: 100px;\n        border: 1px solid var(--ion-color-medium);\n        border-radius: 1em; }\n\n:host .content-wrapper .from-me .text,\n    :host .content-wrapper .from-them .text {\n      padding: 10px 20px;\n      margin: 0; }\n\n:host .content-wrapper .from-me .text ::ng-deep p,\n      :host .content-wrapper .from-them .text ::ng-deep p {\n        margin: 0; }\n\n:host .content-wrapper .from-me .text ::ng-deep a,\n      :host .content-wrapper .from-them .text ::ng-deep a {\n        color: var(--ion-color-primary); }\n\n:host .content-wrapper .from-me {\n    color: var(--ion-color-dark);\n    background: var(--ion-color-light-shade);\n    border-top-right-radius: 0px;\n    float: right; }\n\n:host .content-wrapper .from-me .date {\n      width: 63px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n              flex-direction: column;\n      font-size: 10px;\n      color: var(--ion-color-light-contrast);\n      overflow: hidden;\n      white-space: nowrap; }\n\n:host .content-wrapper .from-them {\n    background: var(--ion-color-gradient);\n    border-top-left-radius: 0px;\n    color: var(--ion-color-light);\n    float: left; }\n\n:host .content-wrapper .from-them .date {\n      width: 63px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n              flex-direction: column;\n      font-size: 10px;\n      color: var(--ion-color-dark-contrast);\n      overflow: hidden;\n      white-space: nowrap; }\n\n:host ion-footer textarea {\n  padding: 5px 10px;\n  overflow: hidden;\n  height: 40px !important;\n  width: calc(100% - 20px);\n  border: 1px solid var(--ion-color-medium);\n  outline: none;\n  resize: none;\n  margin: 5px 10px 0px;\n  border-radius: 3px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9qaW5uL0Rlc2t0b3AvZGV2L3NpbmVvX21lc3Nlbmdlci9zcmMvcGFnZXMvbWVzc2FnZXMvY29tcG9uZW50cy9tZXNzYWdlL21lc3NhZ2UuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixtQ0FBbUM7RUFDbkMsOENBQThDO0VBQzlDLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsOENBQThDLEVBQUE7O0FBVGxEO0VBWUksV0FBVyxFQUFBOztBQVpmO0VBZ0JJLFlBQVksRUFBQTs7QUFoQmhCOztJQW9CTSxrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxnQkFBZ0IsRUFBQTs7QUF2QnRCOztNQTBCUSxZQUFZO01BQ1osYUFBYSxFQUFBOztBQTNCckI7O01BK0JRLGFBQWE7TUFDYixxQ0FBcUM7TUFDckMsb0JBQW9CO01BQ3BCLGdCQUFnQjtNQUNoQixzQkFBc0I7TUFDdEIsMkJBQTJCLEVBQUE7O0FBcENuQzs7UUF1Q1UsYUFBYTtRQUNiLFlBQVk7UUFDWix5Q0FBeUM7UUFDekMsa0JBQWtCLEVBQUE7O0FBMUM1Qjs7TUErQ1Esa0JBQWtCO01BQ2xCLFNBQVMsRUFBQTs7QUFoRGpCOztRQW9EWSxTQUFTLEVBQUE7O0FBcERyQjs7UUF3RFksK0JBQStCLEVBQUE7O0FBeEQzQztJQStETSw0QkFBNEI7SUFDNUIsd0NBQXdDO0lBQ3hDLDRCQUE0QjtJQUM1QixZQUFZLEVBQUE7O0FBbEVsQjtNQXFFUSxXQUFXO01BQ1gsb0JBQWE7TUFBYixhQUFhO01BQ2IsNEJBQXNCO01BQXRCLDZCQUFzQjtjQUF0QixzQkFBc0I7TUFDdEIsZUFBZTtNQUNmLHNDQUFzQztNQUN0QyxnQkFBZ0I7TUFDaEIsbUJBQW1CLEVBQUE7O0FBM0UzQjtJQWdGTSxxQ0FBcUM7SUFDckMsMkJBQTJCO0lBQzNCLDZCQUE2QjtJQUM3QixXQUFXLEVBQUE7O0FBbkZqQjtNQXNGUSxXQUFXO01BQ1gsb0JBQWE7TUFBYixhQUFhO01BQ2IsNEJBQXNCO01BQXRCLDZCQUFzQjtjQUF0QixzQkFBc0I7TUFDdEIsZUFBZTtNQUNmLHFDQUFxQztNQUNyQyxnQkFBZ0I7TUFDaEIsbUJBQW1CLEVBQUE7O0FBNUYzQjtFQW1HTSxpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLHVCQUF1QjtFQUN2Qix3QkFBd0I7RUFDeEIseUNBQXlDO0VBQ3pDLGFBQWE7RUFDYixZQUFZO0VBQ1osb0JBQW9CO0VBQ3BCLGtCQUFrQixFQUFBIiwiZmlsZSI6InNyYy9wYWdlcy9tZXNzYWdlcy9jb21wb25lbnRzL21lc3NhZ2UvbWVzc2FnZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0IHtcclxuICAudGl0bGUtaW1nIHtcclxuICAgIHdpZHRoOiAzMHB4O1xyXG4gICAgaGVpZ2h0OiAzMHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgYmFja2dyb3VuZC1zaXplOiBjb250YWluICFpbXBvcnRhbnQ7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1pb24tY29sb3ItbGlnaHQtc2hhZGUpO1xyXG4gICAgbWFyZ2luLXJpZ2h0OiA1cHg7XHJcbiAgICBtYXJnaW4tbGVmdDogNXB4O1xyXG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0taW9uLWNvbG9yLWxpZ2h0LXNoYWRlKTtcclxuICB9XHJcbiAgLmNsZWFyIHtcclxuICAgIGNsZWFyOiBib3RoO1xyXG4gIH1cclxuXHJcbiAgLmNvbnRlbnQtd3JhcHBlciB7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcblxyXG4gICAgLmZyb20tbWUsXHJcbiAgICAuZnJvbS10aGVtIHtcclxuICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICBib3JkZXItcmFkaXVzOiAxZW07XHJcbiAgICAgIG1hcmdpbjogMTBweCAwO1xyXG4gICAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG5cclxuICAgICAgLmltYWdlIHtcclxuICAgICAgICB3aWR0aDogMjAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMDBweDtcclxuICAgICAgfVxyXG5cclxuICAgICAgLmltYWdlLWdyb3VwIHtcclxuICAgICAgICBkaXNwbGF5OiBncmlkO1xyXG4gICAgICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDIsIDFmcik7XHJcbiAgICAgICAgZ3JpZC1hdXRvLXJvd3M6IGF1dG87XHJcbiAgICAgICAgZ3JpZC1nYXA6IDAuNXJlbTtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDEwcHggNXB4O1xyXG4gICAgICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDFlbTtcclxuXHJcbiAgICAgICAgLmltYWdlLWdyb3VwLWltYWdlIHtcclxuICAgICAgICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICAgICAgICB3aWR0aDogMTAwcHg7XHJcbiAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbWVkaXVtKTtcclxuICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDFlbTtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuXHJcbiAgICAgIC50ZXh0IHtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDIwcHg7XHJcbiAgICAgICAgbWFyZ2luOiAwO1xyXG5cclxuICAgICAgICA6Om5nLWRlZXAge1xyXG4gICAgICAgICAgcCB7XHJcbiAgICAgICAgICAgIG1hcmdpbjogMDtcclxuICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICBhIHtcclxuICAgICAgICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxuICAgICAgICAgIH1cclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICAuZnJvbS1tZSB7XHJcbiAgICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItZGFyayk7XHJcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1saWdodC1zaGFkZSk7XHJcbiAgICAgIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAwcHg7XHJcbiAgICAgIGZsb2F0OiByaWdodDtcclxuICAgICAgLmRhdGUge1xyXG4gICAgICAgIC8vZmxvYXQ6IHJpZ2h0O1xyXG4gICAgICAgIHdpZHRoOiA2M3B4O1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodC1jb250cmFzdCk7XHJcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgICB9XHJcbiAgICB9XHJcblxyXG4gICAgLmZyb20tdGhlbSB7XHJcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1ncmFkaWVudCk7XHJcbiAgICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDBweDtcclxuICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodCk7XHJcbiAgICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgICAuZGF0ZSB7XHJcbiAgICAgICAgLy8gZmxvYXQ6IHJpZ2h0O1xyXG4gICAgICAgIHdpZHRoOiA2M3B4O1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1kYXJrLWNvbnRyYXN0KTtcclxuICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgICAgIH1cclxuICAgIH1cclxuICB9XHJcblxyXG4gIGlvbi1mb290ZXIge1xyXG4gICAgdGV4dGFyZWEge1xyXG4gICAgICBwYWRkaW5nOiA1cHggMTBweDtcclxuICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgaGVpZ2h0OiA0MHB4ICFpbXBvcnRhbnQ7XHJcbiAgICAgIHdpZHRoOiBjYWxjKDEwMCUgLSAyMHB4KTtcclxuICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0taW9uLWNvbG9yLW1lZGl1bSk7XHJcbiAgICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgICAgIHJlc2l6ZTogbm9uZTtcclxuICAgICAgbWFyZ2luOiA1cHggMTBweCAwcHg7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDNweDtcclxuICAgIH1cclxuICB9XHJcbn1cclxuIl19 */"
+module.exports = ":host .title-img {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background-size: contain !important;\n  background-color: var(--ion-color-light-shade);\n  margin-right: 5px;\n  margin-left: 5px;\n  border: 1px solid var(--ion-color-light-shade); }\n  :host .title-img .date {\n    position: relative;\n    top: 30px; }\n  :host .clear {\n  clear: both; }\n  :host .content-wrapper {\n  height: 100%; }\n  :host .content-wrapper .from-me,\n  :host .content-wrapper .from-them {\n    position: relative;\n    border-radius: 1em;\n    margin: 10px 0;\n    overflow: hidden;\n    max-width: 80%; }\n  :host .content-wrapper .from-me .image,\n    :host .content-wrapper .from-them .image {\n      width: 200px;\n      height: 200px; }\n  :host .content-wrapper .from-me .image-group,\n    :host .content-wrapper .from-them .image-group {\n      display: grid;\n      grid-template-columns: repeat(2, 1fr);\n      grid-auto-rows: auto;\n      grid-gap: 0.5rem;\n      padding: 10px 10px 5px;\n      border-top-left-radius: 1em; }\n  :host .content-wrapper .from-me .image-group .image-group-image,\n      :host .content-wrapper .from-them .image-group .image-group-image {\n        height: 100px;\n        width: 100px;\n        border: 1px solid var(--ion-color-medium);\n        border-radius: 1em; }\n  :host .content-wrapper .from-me .text,\n    :host .content-wrapper .from-them .text {\n      padding: 10px 20px;\n      margin: 0; }\n  :host .content-wrapper .from-me .text ::ng-deep p,\n      :host .content-wrapper .from-them .text ::ng-deep p {\n        margin: 0; }\n  :host .content-wrapper .from-me .text ::ng-deep a,\n      :host .content-wrapper .from-them .text ::ng-deep a {\n        color: var(--ion-color-primary); }\n  :host .content-wrapper .from-me {\n    color: var(--ion-color-dark);\n    background: var(--ion-color-light-shade);\n    border-top-right-radius: 0px;\n    float: right; }\n  :host .content-wrapper .from-me .date {\n      width: 63px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n              flex-direction: column;\n      font-size: 10px;\n      color: var(--ion-color-light-contrast);\n      overflow: hidden;\n      white-space: nowrap; }\n  :host .content-wrapper .from-them {\n    background: var(--ion-color-secondary);\n    border-top-left-radius: 0px;\n    color: var(--ion-color-light);\n    float: left; }\n  :host .content-wrapper .from-them .date {\n      width: 63px;\n      display: -webkit-box;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n              flex-direction: column;\n      font-size: 10px;\n      color: var(--ion-color-dark-contrast);\n      overflow: hidden;\n      white-space: nowrap; }\n  :host ion-footer textarea {\n  padding: 5px 10px;\n  overflow: hidden;\n  height: 40px !important;\n  width: calc(100% - 20px);\n  border: 1px solid var(--ion-color-medium);\n  outline: none;\n  resize: none;\n  margin: 5px 10px 0px;\n  border-radius: 3px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9qaW5uL0Rlc2t0b3AvZGV2L3NpbmVvX21lc3Nlbmdlci9zcmMvcGFnZXMvbWVzc2FnZXMvY29tcG9uZW50cy9tZXNzYWdlL21lc3NhZ2UuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFFSSxXQUFXO0VBQ1gsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixtQ0FBbUM7RUFDbkMsOENBQThDO0VBQzlDLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsOENBQThDLEVBQUE7RUFUbEQ7SUFXTSxrQkFBa0I7SUFDbEIsU0FBUSxFQUFBO0VBWmQ7RUFnQkksV0FBVyxFQUFBO0VBaEJmO0VBb0JJLFlBQVksRUFBQTtFQXBCaEI7O0lBd0JNLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsY0FBYztJQUNkLGdCQUFnQjtJQUNoQixjQUFjLEVBQUE7RUE1QnBCOztNQStCUSxZQUFZO01BQ1osYUFBYSxFQUFBO0VBaENyQjs7TUFvQ1EsYUFBYTtNQUNiLHFDQUFxQztNQUNyQyxvQkFBb0I7TUFDcEIsZ0JBQWdCO01BQ2hCLHNCQUFzQjtNQUN0QiwyQkFBMkIsRUFBQTtFQXpDbkM7O1FBNENVLGFBQWE7UUFDYixZQUFZO1FBQ1oseUNBQXlDO1FBQ3pDLGtCQUFrQixFQUFBO0VBL0M1Qjs7TUFvRFEsa0JBQWtCO01BQ2xCLFNBQVMsRUFBQTtFQXJEakI7O1FBeURZLFNBQVMsRUFBQTtFQXpEckI7O1FBNkRZLCtCQUErQixFQUFBO0VBN0QzQztJQW9FTSw0QkFBNEI7SUFDNUIsd0NBQXdDO0lBQ3hDLDRCQUE0QjtJQUM1QixZQUFZLEVBQUE7RUF2RWxCO01BMEVRLFdBQVc7TUFDWCxvQkFBYTtNQUFiLGFBQWE7TUFDYiw0QkFBc0I7TUFBdEIsNkJBQXNCO2NBQXRCLHNCQUFzQjtNQUN0QixlQUFlO01BQ2Ysc0NBQXNDO01BQ3RDLGdCQUFnQjtNQUNoQixtQkFBbUIsRUFBQTtFQWhGM0I7SUFxRk0sc0NBQXNDO0lBQ3RDLDJCQUEyQjtJQUMzQiw2QkFBNkI7SUFDN0IsV0FBVyxFQUFBO0VBeEZqQjtNQTJGUSxXQUFXO01BQ1gsb0JBQWE7TUFBYixhQUFhO01BQ2IsNEJBQXNCO01BQXRCLDZCQUFzQjtjQUF0QixzQkFBc0I7TUFDdEIsZUFBZTtNQUNmLHFDQUFxQztNQUNyQyxnQkFBZ0I7TUFDaEIsbUJBQW1CLEVBQUE7RUFqRzNCO0VBd0dNLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsdUJBQXVCO0VBQ3ZCLHdCQUF3QjtFQUN4Qix5Q0FBeUM7RUFDekMsYUFBYTtFQUNiLFlBQVk7RUFDWixvQkFBb0I7RUFDcEIsa0JBQWtCLEVBQUEiLCJmaWxlIjoic3JjL3BhZ2VzL21lc3NhZ2VzL2NvbXBvbmVudHMvbWVzc2FnZS9tZXNzYWdlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3Qge1xyXG4gIC50aXRsZS1pbWcge1xyXG4gICAgd2lkdGg6IDMwcHg7XHJcbiAgICBoZWlnaHQ6IDMwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBiYWNrZ3JvdW5kLXNpemU6IGNvbnRhaW4gIWltcG9ydGFudDtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodC1zaGFkZSk7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDVweDtcclxuICAgIG1hcmdpbi1sZWZ0OiA1cHg7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbGlnaHQtc2hhZGUpO1xyXG4gICAgLmRhdGUge1xyXG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICAgIHRvcDozMHB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAuY2xlYXIge1xyXG4gICAgY2xlYXI6IGJvdGg7XHJcbiAgfVxyXG5cclxuICAuY29udGVudC13cmFwcGVyIHtcclxuICAgIGhlaWdodDogMTAwJTtcclxuXHJcbiAgICAuZnJvbS1tZSxcclxuICAgIC5mcm9tLXRoZW0ge1xyXG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICAgIGJvcmRlci1yYWRpdXM6IDFlbTtcclxuICAgICAgbWFyZ2luOiAxMHB4IDA7XHJcbiAgICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICAgIG1heC13aWR0aDogODAlO1xyXG5cclxuICAgICAgLmltYWdlIHtcclxuICAgICAgICB3aWR0aDogMjAwcHg7XHJcbiAgICAgICAgaGVpZ2h0OiAyMDBweDtcclxuICAgICAgfVxyXG5cclxuICAgICAgLmltYWdlLWdyb3VwIHtcclxuICAgICAgICBkaXNwbGF5OiBncmlkO1xyXG4gICAgICAgIGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDIsIDFmcik7XHJcbiAgICAgICAgZ3JpZC1hdXRvLXJvd3M6IGF1dG87XHJcbiAgICAgICAgZ3JpZC1nYXA6IDAuNXJlbTtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDEwcHggNXB4O1xyXG4gICAgICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDFlbTtcclxuXHJcbiAgICAgICAgLmltYWdlLWdyb3VwLWltYWdlIHtcclxuICAgICAgICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICAgICAgICB3aWR0aDogMTAwcHg7XHJcbiAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1pb24tY29sb3ItbWVkaXVtKTtcclxuICAgICAgICAgIGJvcmRlci1yYWRpdXM6IDFlbTtcclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuXHJcbiAgICAgIC50ZXh0IHtcclxuICAgICAgICBwYWRkaW5nOiAxMHB4IDIwcHg7XHJcbiAgICAgICAgbWFyZ2luOiAwO1xyXG5cclxuICAgICAgICA6Om5nLWRlZXAge1xyXG4gICAgICAgICAgcCB7XHJcbiAgICAgICAgICAgIG1hcmdpbjogMDtcclxuICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICBhIHtcclxuICAgICAgICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1wcmltYXJ5KTtcclxuICAgICAgICAgIH1cclxuICAgICAgICB9XHJcbiAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICAuZnJvbS1tZSB7XHJcbiAgICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItZGFyayk7XHJcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1saWdodC1zaGFkZSk7XHJcbiAgICAgIGJvcmRlci10b3AtcmlnaHQtcmFkaXVzOiAwcHg7XHJcbiAgICAgIGZsb2F0OiByaWdodDtcclxuICAgICAgLmRhdGUge1xyXG4gICAgICAgIC8vZmxvYXQ6IHJpZ2h0O1xyXG4gICAgICAgIHdpZHRoOiA2M3B4O1xyXG4gICAgICAgIGRpc3BsYXk6IGZsZXg7XHJcbiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcclxuICAgICAgICBmb250LXNpemU6IDEwcHg7XHJcbiAgICAgICAgY29sb3I6IHZhcigtLWlvbi1jb2xvci1saWdodC1jb250cmFzdCk7XHJcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgICB9XHJcbiAgICB9XHJcblxyXG4gICAgLmZyb20tdGhlbSB7XHJcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWlvbi1jb2xvci1zZWNvbmRhcnkpO1xyXG4gICAgICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAwcHg7XHJcbiAgICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItbGlnaHQpO1xyXG4gICAgICBmbG9hdDogbGVmdDtcclxuICAgICAgLmRhdGUge1xyXG4gICAgICAgIC8vIGZsb2F0OiByaWdodDtcclxuICAgICAgICB3aWR0aDogNjNweDtcclxuICAgICAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgICAgIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XHJcbiAgICAgICAgZm9udC1zaXplOiAxMHB4O1xyXG4gICAgICAgIGNvbG9yOiB2YXIoLS1pb24tY29sb3ItZGFyay1jb250cmFzdCk7XHJcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgICB9XHJcbiAgICB9XHJcbiAgfVxyXG5cclxuICBpb24tZm9vdGVyIHtcclxuICAgIHRleHRhcmVhIHtcclxuICAgICAgcGFkZGluZzogNXB4IDEwcHg7XHJcbiAgICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICAgIGhlaWdodDogNDBweCAhaW1wb3J0YW50O1xyXG4gICAgICB3aWR0aDogY2FsYygxMDAlIC0gMjBweCk7XHJcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWlvbi1jb2xvci1tZWRpdW0pO1xyXG4gICAgICBvdXRsaW5lOiBub25lO1xyXG4gICAgICByZXNpemU6IG5vbmU7XHJcbiAgICAgIG1hcmdpbjogNXB4IDEwcHggMHB4O1xyXG4gICAgICBib3JkZXItcmFkaXVzOiAzcHg7XHJcbiAgICB9XHJcbiAgfVxyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -7386,6 +7385,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_messages_messages_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../services/messages/messages.service */ "./src/pages/messages/services/messages/messages.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _app_groupmodal_components_groupmodal_page__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../app/groupmodal/components/groupmodal.page */ "./src/app/groupmodal/components/groupmodal.page.ts");
+/* harmony import */ var _messages_services_calls_calls_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../../messages/services/calls/calls.service */ "./src/pages/messages/services/calls/calls.service.ts");
 
 
 
@@ -7402,6 +7402,7 @@ __webpack_require__.r(__webpack_exports__);
 
 //import { safeEval } from 'safe-eval';
 
+
 /**
  * send messages between users. as a user, you can deactivate autoreply in setting page.
  * or remove autoreply method and all calls to it.
@@ -7410,7 +7411,7 @@ __webpack_require__.r(__webpack_exports__);
  * check readme for info on cloud functions
  */
 let MessageComponent = class MessageComponent extends src_shared_helpers_extender__WEBPACK_IMPORTED_MODULE_5__["Extender"] {
-    constructor(injector, http, navParams, authService, commonService, firestoreService, messageService, settingService, modalController) {
+    constructor(injector, http, navParams, authService, commonService, firestoreService, messageService, settingService, modalController, callService) {
         super(injector);
         this.injector = injector;
         this.http = http;
@@ -7421,6 +7422,7 @@ let MessageComponent = class MessageComponent extends src_shared_helpers_extende
         this.messageService = messageService;
         this.settingService = settingService;
         this.modalController = modalController;
+        this.callService = callService;
         this.sendAt = Date.now();
         this.chat = [];
         this.chatType = _models_message__WEBPACK_IMPORTED_MODULE_9__["CHAT_TYPES"];
@@ -7514,6 +7516,58 @@ let MessageComponent = class MessageComponent extends src_shared_helpers_extende
             });
             return yield modal.present();
         });
+    }
+    openMore(contact) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const actionSheetCtrl = yield this.actionSheetCtrl.create({
+                header: this.translate.instant('other.options'),
+                buttons: [
+                    {
+                        text: this.translate.instant('people-component.call'),
+                        handler: () => {
+                            const sessionToken = this.random();
+                            let videocall = false;
+                            this.callService.startCall(contact, sessionToken, videocall);
+                            this.router.navigate(['/voice-room/' + sessionToken + '/voice']);
+                            this.closeModal();
+                            //            this.commonService.callUser(contact.mobile || contact.phone, this.callNumber);
+                        }
+                    },
+                    {
+                        text: this.translate.instant('people-component.videocall'),
+                        handler: () => {
+                            const sessionToken = this.random();
+                            let videocall = true;
+                            this.callService.startCall(contact, sessionToken, videocall);
+                            this.router.navigate(['/video-room/' + sessionToken + '/video']);
+                            this.closeModal();
+                            //            this.commonService.callUser(contact.mobile || contact.phone, this.callNumber);
+                        }
+                    },
+                    {
+                        text: 'Translator Option',
+                        handler: () => {
+                            this.translatorOptions();
+                        }
+                    },
+                    {
+                        text: this.translate.instant('other.cancel'),
+                        role: 'cancel'
+                    }
+                ]
+            });
+            yield actionSheetCtrl.present();
+        });
+    }
+    random() {
+        //	let rand = Math.floor(Math.random()*20.0)+1.0;
+        //	return rand;
+        return (Math.random()
+            .toString(36)
+            .substring(2, 15) +
+            Math.random()
+                .toString(36)
+                .substring(2, 15));
     }
     /** send message, update uid property of message, this is needed to find the sender id and send notifications to recipients via firebase cloud functions */
     send(text, images = null) {
@@ -7979,6 +8033,9 @@ let MessageComponent = class MessageComponent extends src_shared_helpers_extende
         })
             .catch((err) => this.failPromise(err));
     }
+    goBack() {
+        this.closeModal();
+    }
 };
 MessageComponent.ctorParameters = () => [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] },
@@ -7989,7 +8046,8 @@ MessageComponent.ctorParameters = () => [
     { type: src_shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_8__["FirestoreService"] },
     { type: _services_messages_messages_service__WEBPACK_IMPORTED_MODULE_10__["MessagesService"] },
     { type: src_pages_setting_services_setting_setting_service__WEBPACK_IMPORTED_MODULE_4__["SettingService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _messages_services_calls_calls_service__WEBPACK_IMPORTED_MODULE_13__["CallsService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('content', null),
@@ -8017,7 +8075,8 @@ MessageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         src_shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_8__["FirestoreService"],
         _services_messages_messages_service__WEBPACK_IMPORTED_MODULE_10__["MessagesService"],
         src_pages_setting_services_setting_setting_service__WEBPACK_IMPORTED_MODULE_4__["SettingService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _messages_services_calls_calls_service__WEBPACK_IMPORTED_MODULE_13__["CallsService"]])
 ], MessageComponent);
 
 
@@ -8041,6 +8100,67 @@ var CHAT_TYPES;
     CHAT_TYPES[CHAT_TYPES["IMAGE"] = 2] = "IMAGE";
     CHAT_TYPES[CHAT_TYPES["IMAGE_GROUP"] = 3] = "IMAGE_GROUP";
 })(CHAT_TYPES || (CHAT_TYPES = {}));
+
+
+/***/ }),
+
+/***/ "./src/pages/messages/services/calls/calls.service.ts":
+/*!************************************************************!*\
+  !*** ./src/pages/messages/services/calls/calls.service.ts ***!
+  \************************************************************/
+/*! exports provided: CallsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallsService", function() { return CallsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../auth/services/auth/auth.service */ "./src/pages/auth/services/auth/auth.service.ts");
+/* harmony import */ var _shared_helpers_extender__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../shared/helpers/extender */ "./src/shared/helpers/extender.ts");
+/* harmony import */ var _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../shared/services/firestore/firestore.service */ "./src/shared/services/firestore/firestore.service.ts");
+
+
+
+
+
+let CallsService = class CallsService extends _shared_helpers_extender__WEBPACK_IMPORTED_MODULE_3__["Extender"] {
+    constructor(injector, authService, firestoreService) {
+        super(injector);
+        this.injector = injector;
+        this.authService = authService;
+        this.firestoreService = firestoreService;
+    }
+    startCall(user, sessionToken, videocall) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.createCall(user, sessionToken, videocall);
+        });
+    }
+    createCall(user, sessionToken, videocall) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const { uid } = yield this.authService.getUser();
+            this.firestoreService.add('calls', {
+                participantsId: [user.uid, uid],
+                sessionToken: sessionToken,
+                video: videocall ? "true" : "false"
+            });
+        });
+    }
+};
+CallsService.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"] },
+    { type: _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
+    { type: _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__["FirestoreService"] }
+];
+CallsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injector"],
+        _auth_services_auth_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+        _shared_services_firestore_firestore_service__WEBPACK_IMPORTED_MODULE_4__["FirestoreService"]])
+], CallsService);
+
 
 
 /***/ }),
