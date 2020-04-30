@@ -138,7 +138,7 @@
     "iamport-ionic4-kcp": "^0.2.0",
     "ionicons": "^4.5.8",
     "jasmine": "^3.3.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "jsbarcode": "^3.11.0",
     "libphonenumber-js": "^1.7.25",
     "lodash": "^4.17.15",
